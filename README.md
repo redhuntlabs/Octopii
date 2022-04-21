@@ -1,9 +1,34 @@
-# Piiscan
+```⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣤⣤⣄⣀⡀⠀⠀⠀⢀⣠⣤⣤⣄⡀⠀⠀⠀⢀⣀⣠⣤⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠸⣿⣿⡿⠿⢿⣷⡄⢠⣿⣿⣿⣿⣿⣿⡄⢀⣾⡿⠿⢿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠈⠉⠀⠀⢸⣿⡇⢸⣿⣿⣿⣿⣿⣿⡇⢸⣿⡇⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⣠⣤⡀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⢸⣿⣿⣿⣿⣿⣿⡇⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⢀⣤⣄⠀⠀⠀
+⠸⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⢸⣿⡇⢸⣿⣿⣿⣿⣿⣿⡇⢸⣿⡇⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀
+⠀⠉⠉⠁⠀⠀⠀⠀⣿⣿⠀⢸⣿⡇⠀⠉⣿⣿⣿⣿⠉⠀⢸⣿⡇⠀⣿⣿⠀⠀⠀⠀⠈⠉⠉⠀⠀⠀                O C T O P I I
+⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣀⣈⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⣁⣀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀       
+⠀⠀⠀⠀⠀⠀⠀⠀⠘⠿⠿⠿⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⠿⠿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀(c) Copyright 2022 RedHunt Labs Private Limited
+⠀⠀⠀⠀⠀⠀⢀⣤⣤⣤⣤⣤⣤⣴⣿⣿⣿⡇⢸⣿⡿⣿⣦⣤⣤⣤⣤⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢸⣿⠋⠉⠉⠉⠉⠉⠉⢸⣿⡇⢸⣿⡇⠈⠉⠉⠉⠉⠉⠙⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢰⣿⣿⣦⠀⢰⣿⣿⣦⠀⢸⣿⡇⢸⣿⡇⠀⣰⣿⣿⡆⠀⣴⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠈⠻⠿⠋⠀⠘⣿⣿⠃⠀⢸⣿⡇⢸⣿⡇⠀⠘⣿⣿⠃⠀⠙⠿⠟⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣦⣤⣼⣿⠃⠘⣿⣧⣄⣤⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠛⠛⠁⠀⠀⠈⠛⠛⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+```
 
+<<<<<<< HEAD
 Piiscan is an AI-powered Personal Identifiable Information (PII) scanner that can look for Government IDs, passports, photos and signatures in a directory.
 
 ## Working
 Piiscan uses Tesseract's Optical Character Recognition (OCR) and Keras' Convolutional Neural Networks (CNN) models to detect various forms of personal identifiable information that may be leaked on a publicly facing location. This is done via:
+=======
+
+# Octopii
+
+Octopii is an open-source AI-powered Personal Identifiable Information (PII) scanner that can look for Government IDs, passports, photos and signatures in a directory.
+
+## Working
+Octopii uses Tesseract's Optical Character Recognition (OCR) and Keras' Convolutional Neural Networks (CNN) models to detect various forms of personal identifiable information that may be leaked on a publicly facing location. This is done in the following steps:
+>>>>>>> b2b224c (-)
 
 1. Importing and cleaning image(s)
 
@@ -13,7 +38,17 @@ The image is imported via OpenCV and is cleaned, deskewed and rotated for scanni
 
 The image is scanned for features such as an ISO/IEC 7810 card specification, colors, location of text, photos, holograms etc. This is done by passing it anf comparing it against a trained model.
 
+<<<<<<< HEAD
 3. Optical Character Recognition (OCR)
+=======
+- **Best case** (score >=90): The image is sent into the image classifier algorithm to be scanned for features such as an ISO/IEC 7810 card specification, colors, location of text, photos, holograms etc. If it is successfully classified as a type of PII, OCR is performed on it looking for particular words and strings as a final check. When both of these are confirmed, the result from Octopii is extremely reliable.
+
+- **Average case** (score >=50): The image is partially/incorrectly identified by the image classifier algorithm, but an OCR check finds contradicting substrings and reclassifies it. 
+
+- **Worst case** (score >=0): The image is only identified by the image classifier algorithm and no OCR check is performed on it. 
+
+- **Incorrect classification**: False positives due to a very small model or OCR list may incorrectly classify PIIs, giving inaccurate results. 
+>>>>>>> b2b224c (-)
 
 As a final verification method, images are scanned for certain strings to verify the accuracy of the model.
 
@@ -23,16 +58,17 @@ To train the model, data can also be fed into the `model_generator.py` script, a
 
 ## Usage
 ```
-python3 piiscan.py <location to scan> <additional flags>
+python3 octopii.py <location to scan> <additional flags>
 ```
 1. Install all dependencies via `pip install -r requirements.txt`.
-2. To run piiscan, type `python3 piiscan.py <location name>`, for example `python3 piiscan.py pii_list/`
+2. Install the Tesseract helper locally via `sudo apt install tesseract-ocr -y` (for Ubuntu/Debian).
+3. To run Octopii, type `python3 octopii.py <location name>`, for example `python3 octopii.py pii_list/`
 
-Piiscan currently supports local directories, s3 directories and open directory listing. 
+Octopii currently supports local scanning and scanning S3 directories and open directory listings via their URLs. 
 
 ### Example
 ```
-owais@artemis ~ $ python3 piiscan.py pii_list
+owais@artemis ~ $ python3 octopii.py pii_list
 
 Not a valid image format: pii_list/aadhaar/aadhaar-8.gif
 
@@ -69,10 +105,20 @@ Not a valid image format: pii_list/aadhaar/aadhaar-8.gif
 ```
 
 ## Contributing
-Open-source projects like these thrive on community support. Since piiscan relies heavily on machine learning and optical character recognition,  contributions are much appreciated. Here's how to contribute:
+Open-source projects like these thrive on community support. Since Octopii relies heavily on machine learning and optical character recognition,  contributions are much appreciated. Here's how to contribute:
 
+<<<<<<< HEAD
 1. Fork the official repository at https://github.com/redhuntlabs/piiscan
 2. There are 3 files in the `models/` directory. 
+=======
+### 1. Fork 
+
+Fork the official repository at https://github.com/redhuntlabs/octopii
+
+### 2. Understand
+
+There are 3 files in the `models/` directory. 
+>>>>>>> b2b224c (-)
     - The `keras_models.h5` file is the Keras h5 model that can be obtained from Google's Teachable Machine or via Keras in Python.
     - The `labels.txt` file contains the list of labels corresponding to the index that the model returns. 
     - The `ocr_list.json` file consists of keywords to search for during an OCR scan, as well as other miscellaneous information such as country of origin, regular expressions etc.
@@ -89,12 +135,17 @@ Since our current dataset is quite small, we could benefit from a large Keras mo
 - Click '+ Add a class' at the bottom of the page to add more classes with data and repeat. You can make the classes more specific, such as "Goa Driver License Old Format".
 - Verify the classes and images one last time. Once you're ready, click on the 'Train Model' button. You can increase the epoch size (such as 5000) to improve model accuracy.
 - To test, you can test the model by clicking the Input dropdown and selecting 'File', then uploading a sample image.
-- Once you're ready, click the 'Export Model' button. In the dialog that pops up, select the 'Tensorflow' tab (not Tensorflow.js) and select the 'Keras' radio button, then click 'Download my model' to export the newly generated model. Extract the downloaded zip file and paste the `keras_model.h5` file and `labels.txt` file into the `models/` directory in piiscan.
+- Once you're ready, click the 'Export Model' button. In the dialog that pops up, select the 'Tensorflow' tab (not Tensorflow.js) and select the 'Keras' radio button, then click 'Download my model' to export the newly generated model. Extract the downloaded zip file and paste the `keras_model.h5` file and `labels.txt` file into the `models/` directory in Octopii.
 
 The images used for the model above are not visible to us since they're in a proprietary format. You can use both dummy and actual PII. Make sure they are square-ish in image size. 
 
+<<<<<<< HEAD
 ### Updating OCR list
 Once you generate models using Teachable Machine, you can improve piiscan's accuracy via OCR. To do this:
+=======
+#### Updating OCR list
+Once you generate models using Teachable Machine, you can improve Octopii's accuracy via OCR. To do this:
+>>>>>>> b2b224c (-)
 - Open the existing `ocr_list.json` file. Create a JSONObject with the key having the same name as the asset class. **NOTE: The key name must be exactly the same as the asset class name from Teachable Machine.**
 - For the `keywords`, use as many unique terms from your asset as possible, such as "Income Tax Department". Store them in a JSONArray.
 - *(Advanced)* you can also add regexes for things like ID numbers and MRZ on passports if they are unique enough. Use https://regex101.com to test your regexes before adding them.
