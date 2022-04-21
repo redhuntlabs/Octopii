@@ -57,12 +57,13 @@ The accuracy of the scan can determined via the confidence scores in output. If 
 To train the model, data can also be fed into the `model_generator.py` script, and the newly improved h5 file can be used.
 
 ## Usage
-```
-python3 octopii.py <location to scan> <additional flags>
-```
 1. Install all dependencies via `pip install -r requirements.txt`.
 2. Install the Tesseract helper locally via `sudo apt install tesseract-ocr -y` (for Ubuntu/Debian).
 3. To run Octopii, type `python3 octopii.py <location name>`, for example `python3 octopii.py pii_list/`
+
+```
+python3 octopii.py <location to scan> <additional flags>
+```
 
 Octopii currently supports local scanning and scanning S3 directories and open directory listings via their URLs. 
 
