@@ -45,12 +45,6 @@ model_file_name = 'models/keras_model.h5'
 labels_file_name = 'models/labels.txt'
 ocr_list_file_name = 'models/ocr_list.json'
 
-# Create the array of the right shape to feed into the keras model
-# The 'length' or number of images you can put into the array is
-# determined by the first position in the shape tuple, in this case 1.
-model = load_model(model_file_name)
-data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-
 def print_logo():
     logo = '''
 ⠀⠀⠀⠀⠀⠀⠀⣤⣤⣄⣀⡀⠀⠀⠀⢀⣠⣤⣤⣄⡀⠀⠀⠀⢀⣀⣠⣤⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -123,6 +117,10 @@ def scan_for_text(image_path):
 
 confidence_score = None
 def classify_image(image_path):
+    # Create the array of the right shape to feed into the keras model
+    # The 'length' or number of images you can put into the array is
+    # determined by the first position in the shape tuple, in this case 1.
+    
     global confidence_score
     image = None
     if "http" in image_path: 
@@ -205,12 +203,16 @@ def predict(image_path):
     return (pii_type, country_of_origin, confidence_score)
 
 if __name__ in '__main__':
+
     if len(sys.argv) > 1:
         location = sys.argv[1] 
     else: 
         print_logo()
         hint_screen()
         exit(-1)
+
+    model = load_model(model_file_name)
+    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
     files = []
     items = []
@@ -238,16 +240,17 @@ if __name__ in '__main__':
             extension = str(os.path.splitext(file_path)[1][1:])
             path = str(file_path)
 
-            dictionary = {
-                "asset_type": asset_type, 
-                "country_of_origin": country_of_origin, 
-                "confidence": confidence, 
-                "file_name" : file_name, 
-                "extension": extension, 
-                "path": path
-            }
-        
-            items.append(dictionary)
+            if asset_type != None:
+                dictionary = {
+                    "asset_type": asset_type, 
+                    "country_of_origin": country_of_origin, 
+                    "confidence": confidence, 
+                    "file_name" : file_name, 
+                    "extension": extension, 
+                    "path": path
+                }
+            
+                items.append(dictionary)
 
         except: pass
 
