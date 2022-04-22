@@ -24,7 +24,7 @@ Piiscan uses Tesseract's Optical Character Recognition (OCR) and Keras' Convolut
 
 # Octopii
 
-Octopii is an open-source AI-powered Personal Identifiable Information (PII) scanner that can look for Government IDs, passports, photos and signatures in a directory.
+Octopii is an open-source AI-powered Personal Identifiable Information (PII) scanner that can look for image assets such as Government IDs, passports, photos and signatures in a directory.
 
 ## Working
 Octopii uses Tesseract's Optical Character Recognition (OCR) and Keras' Convolutional Neural Networks (CNN) models to detect various forms of personal identifiable information that may be leaked on a publicly facing location. This is done in the following steps:
