@@ -36,7 +36,11 @@ The image is imported via OpenCV and is cleaned, deskewed and rotated for scanni
 
 2. Performing image classification
 
+<<<<<<< HEAD
 The image is scanned for features such as an ISO/IEC 7810 card specification, colors, location of text, photos, holograms etc. This is done by passing it anf comparing it against a trained model.
+=======
+A directory is looped over and searched for images. These images are scanned for unique features via the image classifier (done by comparing it to a trained model), along with OCR for finding substrings within the image.  This may have one of the following outcomes:
+>>>>>>> 75b39d5 (Updated README)
 
 <<<<<<< HEAD
 3. Optical Character Recognition (OCR)
