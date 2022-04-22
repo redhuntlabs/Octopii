@@ -49,7 +49,7 @@ A directory is looped over and searched for images. These images are scanned for
 
 - **Average case** (score >=50): The image is partially/incorrectly identified by the image classifier algorithm, but an OCR check finds contradicting substrings and reclassifies it. 
 
-- **Worst case** (score >=0): The image is only identified by the image classifier algorithm and no OCR check is performed on it. 
+- **Worst case** (score >=0): The image is only identified by the image classifier algorithm but an OCR scan returns no results. 
 
 - **Incorrect classification**: False positives due to a very small model or OCR list may incorrectly classify PIIs, giving inaccurate results. 
 >>>>>>> b2b224c (-)
