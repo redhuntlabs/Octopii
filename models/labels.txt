@@ -1,0 +1,8 @@
+0 Aadhaar
+1 Bank
+2 Debit and Credit Cards
+3 Driver License
+4 PAN
+5 Passport
+6 Photos
+7 Signature
