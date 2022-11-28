@@ -15,20 +15,12 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠛⠛⠁⠀⠀⠈⠛⠛⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ```
 
-<<<<<<< HEAD
-Piiscan is an AI-powered Personal Identifiable Information (PII) scanner that can look for Government IDs, passports, photos and signatures in a directory.
-
-## Working
-Piiscan uses Tesseract's Optical Character Recognition (OCR) and Keras' Convolutional Neural Networks (CNN) models to detect various forms of personal identifiable information that may be leaked on a publicly facing location. This is done via:
-=======
-
 # Octopii
 
 Octopii is an open-source AI-powered Personal Identifiable Information (PII) scanner that can look for image assets such as Government IDs, passports, photos and signatures in a directory.
 
 ## Working
 Octopii uses Tesseract's Optical Character Recognition (OCR) and Keras' Convolutional Neural Networks (CNN) models to detect various forms of personal identifiable information that may be leaked on a publicly facing location. This is done in the following steps:
->>>>>>> b2b224c (-)
 
 1. Importing and cleaning image(s)
 
@@ -36,23 +28,9 @@ The image is imported via OpenCV and is cleaned, deskewed and rotated for scanni
 
 2. Performing image classification
 
-<<<<<<< HEAD
 The image is scanned for features such as an ISO/IEC 7810 card specification, colors, location of text, photos, holograms etc. This is done by passing it anf comparing it against a trained model.
-=======
-A directory is looped over and searched for images. These images are scanned for unique features via the image classifier (done by comparing it to a trained model), along with OCR for finding substrings within the image.  This may have one of the following outcomes:
->>>>>>> 75b39d5 (Updated README)
 
-<<<<<<< HEAD
 3. Optical Character Recognition (OCR)
-=======
-- **Best case** (score >=90): The image is sent into the image classifier algorithm to be scanned for features such as an ISO/IEC 7810 card specification, colors, location of text, photos, holograms etc. If it is successfully classified as a type of PII, OCR is performed on it looking for particular words and strings as a final check. When both of these are confirmed, the result from Octopii is extremely reliable.
-
-- **Average case** (score >=50): The image is partially/incorrectly identified by the image classifier algorithm, but an OCR check finds contradicting substrings and reclassifies it. 
-
-- **Worst case** (score >=0): The image is only identified by the image classifier algorithm but an OCR scan returns no results. 
-
-- **Incorrect classification**: False positives due to a very small model or OCR list may incorrectly classify PIIs, giving inaccurate results. 
->>>>>>> b2b224c (-)
 
 As a final verification method, images are scanned for certain strings to verify the accuracy of the model.
 
@@ -112,10 +90,6 @@ Not a valid image format: pii_list/aadhaar/aadhaar-8.gif
 ## Contributing
 Open-source projects like these thrive on community support. Since Octopii relies heavily on machine learning and optical character recognition,  contributions are much appreciated. Here's how to contribute:
 
-<<<<<<< HEAD
-1. Fork the official repository at https://github.com/redhuntlabs/piiscan
-2. There are 3 files in the `models/` directory. 
-=======
 ### 1. Fork 
 
 Fork the official repository at https://github.com/redhuntlabs/octopii
@@ -123,10 +97,9 @@ Fork the official repository at https://github.com/redhuntlabs/octopii
 ### 2. Understand
 
 There are 3 files in the `models/` directory. 
->>>>>>> b2b224c (-)
-    - The `keras_models.h5` file is the Keras h5 model that can be obtained from Google's Teachable Machine or via Keras in Python.
-    - The `labels.txt` file contains the list of labels corresponding to the index that the model returns. 
-    - The `ocr_list.json` file consists of keywords to search for during an OCR scan, as well as other miscellaneous information such as country of origin, regular expressions etc.
+- The `keras_models.h5` file is the Keras h5 model that can be obtained from Google's Teachable Machine or via Keras in Python.
+- The `labels.txt` file contains the list of labels corresponding to the index that the model returns. 
+- The `ocr_list.json` file consists of keywords to search for during an OCR scan, as well as other miscellaneous information such as country of origin, regular expressions etc.
 
 ### Generating models via Teachable Machine
 Since our current dataset is quite small, we could benefit from a large Keras model of international PII for this project. If you do not have expertise in Keras, Google provides an extremely easy to use model generator called the Teachable Machine. To use it:
@@ -144,13 +117,9 @@ Since our current dataset is quite small, we could benefit from a large Keras mo
 
 The images used for the model above are not visible to us since they're in a proprietary format. You can use both dummy and actual PII. Make sure they are square-ish in image size. 
 
-<<<<<<< HEAD
-### Updating OCR list
-Once you generate models using Teachable Machine, you can improve piiscan's accuracy via OCR. To do this:
-=======
 #### Updating OCR list
 Once you generate models using Teachable Machine, you can improve Octopii's accuracy via OCR. To do this:
->>>>>>> b2b224c (-)
+
 - Open the existing `ocr_list.json` file. Create a JSONObject with the key having the same name as the asset class. **NOTE: The key name must be exactly the same as the asset class name from Teachable Machine.**
 - For the `keywords`, use as many unique terms from your asset as possible, such as "Income Tax Department". Store them in a JSONArray.
 - *(Advanced)* you can also add regexes for things like ID numbers and MRZ on passports if they are unique enough. Use https://regex101.com to test your regexes before adding them.
