@@ -30,9 +30,12 @@ Octopii is an open-source Personal Identifiable Information (PII) scanner that u
 python3 octopii.py <location to scan> <additional flags>
 ```
 
-Octopii currently supports local scanning via filesystem path, and S3 directory scanning and open directory listing scanning via URLs. 
+Octopii currently supports local scanning via filesystem path, and S3 directory scanning and open directory listing scanning via URLs. You can also supply individual image URLs or files as an argument.
 
 ### Example
+
+The `dummy-pii/` folder contains a bunch of sample PII for you to test Octopii on. To do that, run the command below
+
 ```
 owais@artemis ~ $ python3 octopii.py dummy-pii/
 
@@ -64,6 +67,8 @@ Searching for PII in dummy-pii/dummy-PAN-India.jpg
     ]
 }
 ```
+
+A file named `output.txt` is created containing all the output printed on the console. Since scanning for images takes time, this file is appended to in real-time.
 
 ## Working
 
