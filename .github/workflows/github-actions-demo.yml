@@ -5,6 +5,6 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: ls
-      - run: python octopii.py dummy-pii/
-      - run: cat output.json
+        - run: ls
+#      - run: python octopii.py dummy-pii/
+#      - run: cat output.json
