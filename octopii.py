@@ -88,11 +88,11 @@ def search_pii(file_path):
         if identifier['identifier_class'] == pii_class:
             finalized_identifiers.append(identifier)
 
+    if score < 4 and len(finalized_identifiers) == 0:
+        pii_class = None
+
     if len(finalized_identifiers) != 0:
         finalized_identifiers = identifiers[0]["result"]
-
-    if score < 4:
-        pii_class = None 
 
     if temp_dir in file_path:
         file_path = file_path.replace(temp_dir, "")
@@ -128,7 +128,7 @@ if __name__ in '__main__':
 
     temp_exists = False
 
-    print("Scanning " + location)
+    print("Scanning '" + location + "'")
 
     if "http" in location:
         try:
@@ -174,6 +174,10 @@ if __name__ in '__main__':
             files.append(location)
         else:
             files = file_utils.list_local_files(location)
+
+    if len(files) == 0:
+        print ("Invalid path provided. Please provide a non-empty directory or a file as an argument.")
+        sys.exit(0)
 
     for file_path in files:
         #try:

@@ -46,7 +46,7 @@
       ]
    },
    "Permanent Account Number": {
-     "keywords": ["PAN", "income", "tax", "permanent", "account", "number", "department", "india", "govt."],
+     "keywords": ["PAN", "income", "tax", "permanent", "account", "number", "department", "India", "Govt."],
      "regex": "[A-Z]{5}?[0-9]{4}[A-Z]",
      "region": "India"
    },
@@ -128,7 +128,6 @@
          "Driving",
          "Maharashtra",
          "State",
-         "India",
          "Motor"
       ]
    },
