@@ -120,11 +120,11 @@ def is_image(file_path):
 def append_to_output_file(data, file_name):
     try:
         loaded_json = []
-        with open(file_name, 'r') as read_file:
-            try: 
+        try: 
+            with open(file_name, 'r+') as read_file:    
                 loaded_json = json.loads(read_file.read())
-            except: # No file
-                print ("Creating new file named \'" + file_name + "\'")
+        except: # No file
+            print ("Creating new file named \'" + file_name + "\' and writing to it.")
 
         with open(file_name, 'w') as write_file:
             loaded_json.append(data)
