@@ -1,0 +1,9 @@
+name: Octopii test
+run-name: ${{ github.actor }} is being tested 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: python octopii.py dummy-pii/
+      - run: cat output.json
