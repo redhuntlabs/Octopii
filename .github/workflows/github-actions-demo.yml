@@ -25,4 +25,3 @@ jobs:
       - name: Test with dummy PII
         run: |
           python octopii.py dummy-pii/
-          python octopii.py dummy-pii/
