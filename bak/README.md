@@ -27,15 +27,12 @@ Octopii is an open-source Personal Identifiable Information (PII) scanner that u
 4. To run Octopii, type `python3 octopii.py <location name>`, for example `python3 octopii.py pii_list/`
 
 ```
-python3 octopii.py <location to scan>
+python3 octopii.py <location to scan> <additional flags>
 ```
 
-Octopii currently supports local scanning via filesystem path, and S3 directory scanning and open directory listing scanning via URLs. You can also supply individual image URLs or files as an argument.
+Octopii currently supports local scanning via filesystem path, and S3 directory scanning and open directory listing scanning via URLs. 
 
 ### Example
-
-The `dummy-pii/` folder contains a bunch of sample PII for you to test Octopii on. To do that, run the command below
-
 ```
 owais@artemis ~ $ python3 octopii.py dummy-pii/
 
@@ -67,8 +64,6 @@ Searching for PII in dummy-pii/dummy-PAN-India.jpg
     ]
 }
 ```
-
-A file named `output.txt` is created containing all the output printed on the console. Since scanning for images takes time, this file is appended to in real-time.
 
 ## Working
 
@@ -133,8 +128,8 @@ An item in this file looks as follows:
 Keep the following rules in mind when writing your own definitions:
 
 - PII class: The PII class name must contain the simple, common name of the document. For example, the Indian Government issued ID card is known as "Aadhaar", so that must be the PII class.
-- Regex: The regex must be as precise as possible and must only exist if the ID card's identifier has an obvious pattern. For example, an Indian Permanent Account Number (PAN) card always has five Latin characters, followed by four numbers and a final Latin character (XXXXX0000X). Thus, a good regex can be used here. Please be extra careful with this step so as to avoid false positives. You may set this to `null` if you wish.
-- Country of origin: Where this PII originates from. Keep this as simple as possible and use common, shortened names. For example, "India" instead of "Republic of India". If you'd like to denote a province/state/subdivision, use the PII class field instead of this field. You may set this to `null` if you wish.
+- Regex: The regex must be as precise as possible and must only exist if the ID card's identifier has an obvious pattern. For example, an Indian Permanent Account Number (PAN) card always has five Latin characters, followed by four numbers and a final Latin character (XXXXX0000X). Thus, a good regex can be used here. Please be extra careful with this step so as to avoid false positives. You can also set this to `null` if you wish.
+- Region: The region this PII originates from. Keep this as simple as possible and use common, shortened names. For example, "India" instead of "Republic of India". You can also set this to `null` if you wish.
 - Keywords: This is a list of prominent words in the Latin script, appearing in the document that can be picked up during OCR checks. Make sure these words are very specific to the document. Avoid using common words such as "the" or "of". For example, Indian Aadhaar cards have the words "Aadhaar", "Unique Identification" and "India" in English. These are good, unique words that generally don't appear in other documents.
 
 ### 4. Pull request
