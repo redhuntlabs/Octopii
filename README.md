@@ -18,15 +18,17 @@
 
 # Octopii
 
-Octopii is an open-source Personal Identifiable Information (PII) scanner that uses Optical Character Recognition (OCR), regular expression lists and Natural Language Processing (NLP) to find for Government ID numbers, addresses, emails etc in images, PDFs and documents.
+Octopii is an open-source Personal Identifiable Information (PII) scanner that uses Optical Character Recognition (OCR), regular expression lists and Natural Language Processing (NLP) to search for Government ID, addresses, emails etc in images, PDFs and documents in exposed locations.
 
 ## Usage
-### Install dependencies
+### Installing dependencies
 1. Install all dependencies via `pip install -r requirements.txt`.
 2. Install the Tesseract helper locally via `sudo apt install tesseract-ocr -y` on Ubuntu or `sudo pacman -Syu tesseract` on Arch Linux.
 3. Install Spacy language definitions locally via `python -m spacy download en_core_web_sm`.
 
 Once you've installed the above, you're all set to use Octopii.
+
+### Running
 
 To run, type
 
