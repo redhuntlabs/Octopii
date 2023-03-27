@@ -18,23 +18,34 @@
 
 # Octopii
 
-Octopii is an open-source Personal Identifiable Information (PII) scanner that uses Optical Character Recognition (OCR), regular expression lists and Natural Language Processing (NLP) to find for Government ID numbers, addresses, emails etc in images, PDFs and documents.
+Octopii is an open-source Personal Identifiable Information (PII) scanner that uses Optical Character Recognition (OCR), regular expression lists and Natural Language Processing (NLP) to search for Government ID, addresses, emails etc in images, PDFs and documents in exposed locations.
+
+PII is often overlooked in the cybersecurity space. Our research at RedHunt Labs indicates that organizations and services that have their employee or customer databases configured incorrectly accidentally leak PII all the time, giving malicious parties information about their origins, ID numbers, contact information and their location.
+
+This is why we created Octopii a tool intended to demonstrate how easy it is to automate the extraction of leaked assets such as PII and how easy it is to misplace sensitive documents on the Internet.
 
 ## Usage
+### Installing dependencies
 1. Install all dependencies via `pip install -r requirements.txt`.
 2. Install the Tesseract helper locally via `sudo apt install tesseract-ocr -y` on Ubuntu or `sudo pacman -Syu tesseract` on Arch Linux.
 3. Install Spacy language definitions locally via `python -m spacy download en_core_web_sm`.
-4. To run Octopii, type `python3 octopii.py <location name>`, for example `python3 octopii.py pii_list/`
+
+Once you've installed the above, you're all set to use Octopii.
+
+### Running
+
+To run, type
 
 ```
 python3 octopii.py <location to scan>
 ```
+_where `<location to scan>` is a file or a directory._
 
 Octopii currently supports local scanning via filesystem path, and S3 directory scanning and open directory listing scanning via URLs. You can also supply individual image URLs or files as an argument.
 
 ### Example
 
-The `dummy-pii/` folder contains a bunch of sample PII for you to test Octopii on. To do that, run the command below
+The `dummy-pii/` folder contains a bunch of sample PII for you to test Octopii on. Passing it as an argument results in the output below
 
 ```
 owais@artemis ~ $ python3 octopii.py dummy-pii/
@@ -66,6 +77,8 @@ Searching for PII in dummy-pii/dummy-PAN-India.jpg
         "INDIA"
     ]
 }
+
+...
 ```
 
 A file named `output.txt` is created containing all the output printed on the console. Since scanning for images takes time, this file is appended to in real-time.
@@ -101,45 +114,20 @@ Tesseract is used to grab all text strings from an image/file. It is then tokeni
 
 This list of words is then fed into a similarity checker function. This function uses Gestalt pattern matching to compare each word extracted from the PII document with a list of keywords, present in `definitions.json`. This check is applied on each cleaning attempt of a PII image. The number of times a word occurs from the keywords list is counted and this is used to derive the confidence score. When a particular definition's keywords appear frequently in this scan, it gets the highest score and is thus picked as the predicted PII class and its country of origin.
 
-Additionally, Octopii also checks for sensitive PII substrings such as emails, phone numbers and common government ID unique identifiers using regular expressions. It can also extract geolocation data such as addresses and countries using Natural Language Processing.
+Octopii also checks for sensitive PII substrings such as emails, phone numbers and common government ID unique identifiers using regular expressions. It can also extract geolocation data such as addresses and countries using Natural Language Processing.
+
+### 4. Output
+
+The output consists of the following:
+- `file_path`: Where the file containing PII can be found
+- `pii_class`: The type of PII this file contains
+- `country_of_origin`: Where this PII originates from. 
+- `identifiers`: Unique identifiers, codes or numbers that may be used to target the individual mentioned in the PII.
+- `emails and phone_numbers`: Contact information in the file.
+- `addresses`: Any form of geolocation data in the PII. This may be used to triangulate an individual's location.
 
 ## Contributing
-Open-source projects like these thrive on community support. Since Octopii relies heavily on preset definitions, contributions are much appreciated. Here's how to contribute:
-
-### 1. Fork 
-
-Fork the official repository at https://github.com/redhuntlabs/octopii
-
-### 2. Understand
-
-The `definitions.json` file consists of keywords to search for during an OCR scan, as well as other miscellaneous information such as country of origin, regular expressions etc.
-
-An item in this file looks as follows:
-
-```
-"<pii class name>" : {
-      "regex" : "<a regular expression or null>",
-      "region" : <the country this PII originates from or null>,
-      "keywords" : [
-         "<keyword 1>",
-         "<keyword 2>",
-         ...
-      ]
-   },
-```
-
-### 3. Updating definitions
-
-Keep the following rules in mind when writing your own definitions:
-
-- PII class: The PII class name must contain the simple, common name of the document. For example, the Indian Government issued ID card is known as "Aadhaar", so that must be the PII class.
-- Regex: The regex must be as precise as possible and must only exist if the ID card's identifier has an obvious pattern. For example, an Indian Permanent Account Number (PAN) card always has five Latin characters, followed by four numbers and a final Latin character (XXXXX0000X). Thus, a good regex can be used here. Please be extra careful with this step so as to avoid false positives. You may set this to `null` if you wish.
-- Country of origin: Where this PII originates from. Keep this as simple as possible and use common, shortened names. For example, "India" instead of "Republic of India". If you'd like to denote a province/state/subdivision, use the PII class field instead of this field. You may set this to `null` if you wish.
-- Keywords: This is a list of prominent words in the Latin script, appearing in the document that can be picked up during OCR checks. Make sure these words are very specific to the document. Avoid using common words such as "the" or "of". For example, Indian Aadhaar cards have the words "Aadhaar", "Unique Identification" and "India" in English. These are good, unique words that generally don't appear in other documents.
-
-### 4. Pull request
-
-Submit a pull request from your forked repo and we'll pick it up and merge it if the changes are good.
+[Click here](CONTRIBUTING.md) to read about how you can contribute to Octopii.  
 
 ---
 
@@ -152,6 +140,11 @@ Submit a pull request from your forked repo and we'll pick it up and merge it if
 - Python Image Library
 - [Spaces - DigitalOcean](https://www.digitalocean.com/products/spaces)
 - [Teachable Macine - Google](https://teachablemachine.withgoogle.com/) 
+...and countless other people
+
+## Disclaimer
+
+This tool is intended for research and educational purposes only. RedHunt Labs and other contributors to this project take no responsibility for malicious usage of this tool.
 
 ## License
 
@@ -159,4 +152,4 @@ Submit a pull request from your forked repo and we'll pick it up and merge it if
 
 (c) Copyright 2023 RedHunt Labs Private Limited
 
-Author: Owais Shaikh
+Original author: Owais Shaikh (owais.shaikh@redhuntlabs.com | 0x4f@tuta.io)
