@@ -140,6 +140,7 @@ The output consists of the following:
 - Python Image Library
 - [Spaces - DigitalOcean](https://www.digitalocean.com/products/spaces)
 - [Teachable Macine - Google](https://teachablemachine.withgoogle.com/) 
+
 ...and countless other people
 
 ## Disclaimer
