@@ -27,7 +27,7 @@ Octopii is an open-source Personal Identifiable Information (PII) scanner that u
 4. To run Octopii, type `python3 octopii.py <location name>`, for example `python3 octopii.py pii_list/`
 
 ```
-python3 octopii.py <location to scan> <additional flags>
+python3 octopii.py <location to scan>
 ```
 
 Octopii currently supports local scanning via filesystem path, and S3 directory scanning and open directory listing scanning via URLs. You can also supply individual image URLs or files as an argument.
