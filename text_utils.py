@@ -80,14 +80,15 @@ def regional_pii(text):
     import locationtagger
     try:
         place_entity = locationtagger.find_locations(text = text)
-        return place_entity.address_strings + place_entity.regions + place_entity.countries
     except LookupError:
         nltk.downloader.download('punkt')
         nltk.download('averaged_perceptron_tagger')
         nltk.download('maxent_ne_chunker')
         nltk.download('words')
         place_entity = locationtagger.find_locations(text = text)
-        return place_entity.address_strings + place_entity.regions + place_entity.countries
+    
+    final_output = place_entity.address_strings + place_entity.regions + place_entity.countries
+    return final_output
 
 def keywords_classify_pii(rules, intelligible_text_list):
     keys = rules.keys()

@@ -40,13 +40,12 @@
          "Unique",
          "Identification",
          "Authority",
-         "India",
          "Address",
-         "Government"
+         "Government of India"
       ]
    },
    "Permanent Account Number": {
-     "keywords": ["PAN", "income", "tax", "permanent", "account", "number", "department", "India", "Govt."],
+     "keywords": ["PAN", "income", "tax", "permanent", "account", "department", "India", "Govt."],
      "regex": "[A-Z]{5}?[0-9]{4}[A-Z]",
      "region": "India"
    },
@@ -56,6 +55,9 @@
       "keywords":[
          "Voter ID",
          "EPIC",
+         "Election",
+         "Commission",
+         "India",
          "Constituency"
       ]
    },
@@ -65,8 +67,6 @@
       "keywords":[
          "SSN",
          "Social Security",
-         "been",
-         "for",
          "USA",
          "Security"
       ]
@@ -76,8 +76,21 @@
       "region":"Canada",
       "keywords":[
          "SIN",
-         "Social Insurance Number",
-         "Human resources",
+         "Development Canada",
+         "Social", 
+         "Insurance",
+         "Canada"
+      ]
+   },
+   "Permanent Resident Card":{
+      "regex":"\b(?:\\d{3}-\\d{3}-\\d{3})\b|\b(?:\\d{3} \\d{3} \\d{3})\b",
+      "region":"Canada",
+      "keywords":[
+         "Permanent",
+         "Resident",
+         "Card", 
+         "Nationality", 
+         "Government",
          "Canada"
       ]
    },
@@ -135,5 +148,17 @@
        "regex":"[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}",
        "region":null,
        "keywords":null
+   },
+   "Résumé":{
+       "regex":null,
+       "region":null,
+       "keywords":[
+         "Experience",
+         "Education",
+         "Skill",
+         "References",
+         "Resume",
+         "Work"
+      ]
    }
 }

@@ -64,7 +64,7 @@ def search_pii(file_path):
 
     elif (file_utils.is_pdf(file_path)):
         pdf_pages = convert_from_path(file_path, 400) # Higher DPI reads small text better
-        for page in pdf_pages:                
+        for page in pdf_pages:      
             original, intelligible = image_utils.scan_image_for_text(page)
             text = original
 
@@ -83,6 +83,7 @@ def search_pii(file_path):
     country_of_origin = rules[pii_class]["region"]
 
     identifiers = text_utils.id_card_numbers_pii(text, rules)
+    
     finalized_identifiers = []
     for identifier in identifiers:
         if identifier['identifier_class'] == pii_class:

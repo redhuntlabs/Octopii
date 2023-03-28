@@ -105,7 +105,7 @@ def list_local_files(local_path):
 
 def is_pdf(file_path):
     try:
-        convert_from_path(file_path, 400)
+        convert_from_path(file_path, 100)
         return True
     except:
         return False
