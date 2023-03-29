@@ -20,7 +20,7 @@
 
 Octopii is a Personally Identifiable Information (PII) scanner that uses Optical Character Recognition (OCR), regular expression lists and Natural Language Processing (NLP) to search public-facing locations for Government ID, addresses, emails etc in images, PDFs and documents.
 
-PII leaks are often overlooked in the cybersecurity space. At RedHunt Labs, we always look for different and innovative ways to come up with cybersecurity solutions that organizations and services face. We've encountered a substantial number of organizations that have their employee or customer data configured incorrectly. This causes PII to leak all the time, giving malicious parties sensitive information about their origins, ID numbers, contact information and their location.
+PII leaks are often overlooked in the cybersecurity space. At RedHunt Labs, we always look for different and innovative ways to come up with cybersecurity solutions that organizations and services need. We've encountered a substantial number of organizations that have their employee or customer data configured incorrectly. This causes PII to leak all the time, giving malicious parties sensitive information about their origins, ID numbers, contact information and their location.
 
 This is why we created Octopii, a tool to demonstrate and detect how easy it is to automate the discovery and extraction of leaked PII, and how easy it is to misplace sensitive documents on the Internet.
 
