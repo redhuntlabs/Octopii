@@ -25,7 +25,7 @@ Octopii is a Personally Identifiable Information (PII) scanner that uses Optical
 
 PII leaks are often overlooked in the cybersecurity space. At RedHunt Labs, we always look for different and innovative ways to come up with cybersecurity solutions that organizations and services need. We've encountered a substantial number of organizations that have their servers configured incorrectly. This causes employee and customer PII to leak all the time, giving malicious parties sensitive information about their origins, ID numbers, contact information and their location.
 
-This is why we created Octopii, a tool to demonstrate and detect how easy it is to automate the discovery and extraction of leaked PII, and how easy it is to misplace sensitive documents on the Internet.
+This is why we created Octopii, a tool to demonstrate and detect how easy it is to automate the discovery and extraction of leaked PII and sensitive documents on the Internet.
 
 ## Usage
 ### Installing dependencies
