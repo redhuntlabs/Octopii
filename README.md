@@ -44,7 +44,7 @@ python3 octopii.py <location to scan>
 ```
 _where `<location to scan>` is a file or a directory._
 
-Octopii currently supports local scanning via filesystem path, and S3 directory scanning and open directory listing scanning via URLs. You can also supply individual image URLs or files as an argument.
+Octopii currently supports local scanning via filesystem path, S3 URLs and Apache open directory listings. You can also provide individual image URLs or files as an argument.
 
 ### Example
 
