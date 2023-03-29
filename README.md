@@ -1,3 +1,5 @@
+# Octopii
+
 ```⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⣤⣤⣄⣀⡀⠀⠀⠀⢀⣠⣤⣤⣄⡀⠀⠀⠀⢀⣀⣠⣤⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠸⣿⣿⡿⠿⢿⣷⡄⢠⣿⣿⣿⣿⣿⣿⡄⢀⣾⡿⠿⢿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀
@@ -17,9 +19,6 @@
 ⠀⠀⠀⠀⠀⠀      ⠀O C T O P I I⠀⠀⠀⠀
 Copyright © 2023 RedHunt Labs Private Limited
 ```
-
-
-# Octopii
 
 Octopii is a Personally Identifiable Information (PII) scanner that uses Optical Character Recognition (OCR), regular expression lists and Natural Language Processing (NLP) to search public-facing locations for Government ID, addresses, emails etc in images, PDFs and documents.
 
@@ -126,7 +125,7 @@ The output consists of the following:
 - `pii_class`: The type of PII this file contains
 - `country_of_origin`: Where this PII originates from. 
 - `identifiers`: Unique identifiers, codes or numbers that may be used to target the individual mentioned in the PII.
-- `emails and phone_numbers`: Contact information in the file.
+- `emails` and `phone_numbers`: Contact information in the file.
 - `addresses`: Any form of geolocation data in the PII. This may be used to triangulate an individual's location.
 
 ## Contributing
