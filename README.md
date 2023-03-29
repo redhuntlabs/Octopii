@@ -18,11 +18,11 @@
 
 # Octopii
 
-Octopii is an open-source Personal Identifiable Information (PII) scanner that uses Optical Character Recognition (OCR), regular expression lists and Natural Language Processing (NLP) to search for Government ID, addresses, emails etc in images, PDFs and documents in exposed locations.
+Octopii is a Personally Identifiable Information (PII) scanner that uses Optical Character Recognition (OCR), regular expression lists and Natural Language Processing (NLP) to search public-facing locations for Government ID, addresses, emails etc in images, PDFs and documents.
 
-PII is often overlooked in the cybersecurity space. Our research at RedHunt Labs indicates that organizations and services that have their employee or customer databases configured incorrectly accidentally leak PII all the time, giving malicious parties information about their origins, ID numbers, contact information and their location.
+PII leaks are often overlooked in the cybersecurity space. At RedHunt Labs, we always look for different and innovative ways to come up with cybersecurity solutions that organizations and services face. We've encountered a substantial number of organizations that have their employee or customer data configured incorrectly. This causes PII to leak all the time, giving malicious parties sensitive information about their origins, ID numbers, contact information and their location.
 
-This is why we created Octopii a tool intended to demonstrate how easy it is to automate the extraction of leaked assets such as PII and how easy it is to misplace sensitive documents on the Internet.
+This is why we created Octopii, a tool to demonstrate and detect how easy it is to automate the discovery and extraction of leaked PII, and how easy it is to misplace sensitive documents on the Internet.
 
 ## Usage
 ### Installing dependencies
@@ -30,11 +30,11 @@ This is why we created Octopii a tool intended to demonstrate how easy it is to 
 2. Install the Tesseract helper locally via `sudo apt install tesseract-ocr -y` on Ubuntu or `sudo pacman -Syu tesseract` on Arch Linux.
 3. Install Spacy language definitions locally via `python -m spacy download en_core_web_sm`.
 
-Once you've installed the above, you're all set to use Octopii.
+Once you've installed the above, you're all set.
 
 ### Running
 
-To run, type
+To run Octopii, type
 
 ```
 python3 octopii.py <location to scan>
@@ -45,7 +45,7 @@ Octopii currently supports local scanning via filesystem path, and S3 directory 
 
 ### Example
 
-The `dummy-pii/` folder contains a bunch of sample PII for you to test Octopii on. Passing it as an argument results in the output below
+We've provided a `dummy-pii/` folder containing sample PII for you to test Octopii with. Pass it as an argument and you'll get the following output
 
 ```
 owais@artemis ~ $ python3 octopii.py dummy-pii/
@@ -81,38 +81,38 @@ Searching for PII in dummy-pii/dummy-PAN-India.jpg
 ...
 ```
 
-A file named `output.txt` is created containing all the output printed on the console. Since scanning for images takes time, this file is appended to in real-time.
+A file named `output.txt` is created, containing output from the tool. This file is appended to sequentially in real-time.
 
 ## Working
 
-Octopii uses Tesseract's Optical Character Recognition (OCR) and NLTK's Natural Language Processing (NLP) to detect various forms of personal identifiable information that may be leaked in a public location. This is done via the following steps:
+Octopii uses Tesseract for Optical Character Recognition (OCR) and NLTK for Natural Language Processing (NLP) to detect for strings of personal identifiable information. This is done via the following steps:
 
 ### 1. Input
 
-Octopii can scan for images (jpg and png) and documents (pdf, doc, txt etc). It also supports 3 sources:
+Octopii scans for images (jpg and png) and documents (pdf, doc, txt etc). It supports 3 sources:
 
-1. Amazon Simple Storage Service (S3): traverses S3 container URLs containing XML storage schemas and scans for files 
-2. Open directory listing: traverses open directory listings such as Apache Tomcat and scans for files 
+1. Amazon Simple Storage Service (S3): traverses the XML from S3 container URLs
+2. Open directory listing: traverses Apache open directory listings and scans for files 
 3. Local filesystem: can access files and folders within UNIX-like filesystems (macOS and Linux-based operating systems)
 
 ### 2. Importing and cleaning image(s)
 
-Images are detected imported via Python Imaging Library (PIL) and are opened with OpenCV. They are then "cleaned" for text extraction using the following image transformation steps:
+Images are detected via Python Imaging Library (PIL) and are opened with OpenCV. They are then "cleaned" for text extraction with the following image transformation steps:
 
 1. Auto-rotation
 2. Grayscaling
 3. Monochrome
 4. Mean threshold
 5. Gaussian threshold
-6. Deskewing (thrice)
+6. 3x Deskewing
 
 ![Image filtering illustration](image_filtering_illustration.png) 
 
-### 3. Performing Optical Character Recognition (OCR)
+### 3. Optical Character Recognition (OCR)
 
 Tesseract is used to grab all text strings from an image/file. It is then tokenized into a list of strings, via newline characters ('\n') and spaces (' '). Garbled text, such as null strings and single characters are then removed from this list, resulting in an 'intelligible' list of potential words.
 
-This list of words is then fed into a similarity checker function. This function uses Gestalt pattern matching to compare each word extracted from the PII document with a list of keywords, present in `definitions.json`. This check is applied on each cleaning attempt of a PII image. The number of times a word occurs from the keywords list is counted and this is used to derive the confidence score. When a particular definition's keywords appear frequently in this scan, it gets the highest score and is thus picked as the predicted PII class and its country of origin.
+This list of words is then fed into a similarity checker function. This function uses Gestalt pattern matching to compare each word extracted from the PII document with a list of keywords, present in `definitions.json`. This check happens once per cleaning. The number of times a word occurs from the keywords list is counted and this is used to derive a confidence score. When a particular definition's keywords appear repeatedly in these scans, that definition gets the highest score and is picked as the predicted PII class.
 
 Octopii also checks for sensitive PII substrings such as emails, phone numbers and common government ID unique identifiers using regular expressions. It can also extract geolocation data such as addresses and countries using Natural Language Processing.
 
