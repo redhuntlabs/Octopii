@@ -62,7 +62,7 @@
       ]
    },
    "Social Security Number":{
-      "regex":"^[0-9]{3}-[0-9]{2}-[0-9]{3,4}$",
+      "regex":"[0-9]{3}-[0-9]{2}-[0-9]{3,4}",
       "region":"United States",
       "keywords":[
          "SSN",
@@ -202,7 +202,7 @@
       ]
    },
    "Ukraine ID Card":{
-      "regex":"^(?:IDUKR)(?:[A-Z0-9<].+)",
+      "regex":"(?:IDUKR)(?:[A-Z0-9<].+)",
       "region":"Ukraine",
       "keywords":[
          "Ukraine",
@@ -213,7 +213,7 @@
       ]
    },
    "Ukrainian Passport":{
-      "regex":"^(?:P<UKR)(?:[A-Z0-9<].+)",
+      "regex":"(?:P<UKR)(?:[A-Z0-9<].+)",
       "region":"Ukraine",
       "keywords":[
          "Ukraine",
