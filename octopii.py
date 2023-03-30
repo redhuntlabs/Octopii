@@ -69,9 +69,13 @@ def search_pii(file_path):
             text = original
 
     else:
-        text = textract.process(file_path).decode()
-        intelligible = text_utils.string_tokenizer(text)
-        
+        try:
+            text = textract.process(file_path).decode()
+            intelligible = text_utils.string_tokenizer(text)
+        except textract.exceptions.MissingFileError:
+            print ("Couldn't find file '" + file_path + "'")
+            exit(-1)
+
     addresses = text_utils.regional_pii(text)
     emails = text_utils.email_pii(text, rules)
     phone_numbers = text_utils.phone_pii(text, rules)
@@ -83,17 +87,12 @@ def search_pii(file_path):
     country_of_origin = rules[pii_class]["region"]
 
     identifiers = text_utils.id_card_numbers_pii(text, rules)
-    
-    finalized_identifiers = []
-    for identifier in identifiers:
-        if identifier['identifier_class'] == pii_class:
-            finalized_identifiers.append(identifier)
 
-    if score < 4 and len(finalized_identifiers) == 0:
+    if score < 5:
         pii_class = None
 
-    if len(finalized_identifiers) != 0:
-        finalized_identifiers = identifiers[0]["result"]
+    if len(identifiers) != 0:
+        identifiers = identifiers[0]["result"]
 
     if temp_dir in file_path:
         file_path = file_path.replace(temp_dir, "")
@@ -104,7 +103,7 @@ def search_pii(file_path):
         "pii_class" : pii_class,
         "score" : score,
         "country_of_origin": country_of_origin,
-        "identifiers" : finalized_identifiers,
+        "identifiers" : identifiers,
         "emails" : emails,
         "phone_numbers" : phone_numbers,
         "addresses" : addresses
@@ -181,12 +180,9 @@ if __name__ in '__main__':
         sys.exit(0)
 
     for file_path in files:
-        #try:
         results = search_pii (file_path)
         print(json.dumps(results, indent=4))
         file_utils.append_to_output_file(results, output_file)
-        #except:
-        #    print("Couldn't read " + file_path +". Skipping...")
 
     print ("Output saved in " + output_file)
 
