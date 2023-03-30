@@ -87,6 +87,7 @@ def search_pii(file_path):
     country_of_origin = rules[pii_class]["region"]
 
     identifiers = text_utils.id_card_numbers_pii(text, rules)
+    print(text)
 
     if score < 5:
         pii_class = None

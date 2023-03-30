@@ -28,7 +28,7 @@
           "debit card", "credit card", "atm card", "bank", "valid", "expires", "expiry", "thru", "cvv"
       ],
       "regex": ["\\b(?:\\d{4}[ -]?){3}(?=\\d{4}\\b)(?:\\d{4})"],
-      "region": "International"
+      "region": null
    },
    "Aadhaar Card":{
       "regex":"([0-9]{4} [0-9]{4} [0-9]{4}|[0-9]{4}-[0-9]{4}-[0-9]{4}|[0-9]{12})",
