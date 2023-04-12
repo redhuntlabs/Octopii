@@ -52,9 +52,7 @@ def print_logo():
 
 def help_screen():
     help = '''Usage: python octopii.py <file, local path or URL>
-Note: Only Unix-like filesystems, S3 and open directory URLs are supported.
-
-Reach out to owais.shaikh@redhuntlabs.com for queries'''
+Note: Only Unix-like filesystems, S3 and open directory URLs are supported.'''
     print(help)
 
 def search_pii(file_path):
