@@ -68,7 +68,7 @@ def search_pii(file_path):
     elif (file_utils.is_pdf(file_path)):
         pdf_pages = convert_from_path(file_path, 400) # Higher DPI reads small text better
         for page in pdf_pages:
-            contains_face = image_utils.scan_image_for_people(image)
+            contains_face = image_utils.scan_image_for_people(page)
 
             original, intelligible = image_utils.scan_image_for_text(page)
             text = original
