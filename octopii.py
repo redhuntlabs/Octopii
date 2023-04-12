@@ -59,12 +59,17 @@ Reach out to owais.shaikh@redhuntlabs.com for queries'''
 
 def search_pii(file_path):
     if (file_utils.is_image(file_path)):
-        original, intelligible = image_utils.scan_image_for_text(cv2.imread(file_path))
+        image = cv2.imread(file_path)
+        contains_face = image_utils.scan_image_for_people(image)
+
+        original, intelligible = image_utils.scan_image_for_text(image)
         text = original
 
     elif (file_utils.is_pdf(file_path)):
         pdf_pages = convert_from_path(file_path, 400) # Higher DPI reads small text better
-        for page in pdf_pages:      
+        for page in pdf_pages:
+            contains_face = image_utils.scan_image_for_people(image)
+
             original, intelligible = image_utils.scan_image_for_text(page)
             text = original
 
@@ -103,6 +108,7 @@ def search_pii(file_path):
         "pii_class" : pii_class,
         "score" : score,
         "country_of_origin": country_of_origin,
+        "faces" : contains_face,
         "identifiers" : identifiers,
         "emails" : emails,
         "phone_numbers" : phone_numbers,
