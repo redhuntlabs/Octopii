@@ -57,6 +57,7 @@ Searching for PII in dummy-pii/dummy-drivers-license-nebraska-us.jpg
     "file_path": "dummy-pii/dummy-drivers-license-nebraska-us.jpg",
     "pii_class": "Nebraska Driver's License",
     "country_of_origin": "United States",
+    "faces": 1,
     "identifiers": [],
     "emails": [],
     "phone_numbers": [
@@ -72,6 +73,7 @@ Searching for PII in dummy-pii/dummy-PAN-India.jpg
     "file_path": "dummy-pii/dummy-PAN-India.jpg",
     "pii_class": "Permanent Account Number",
     "country_of_origin": "India",
+    "faces": 0,
     "identifiers": [],
     "emails": [],
     "phone_numbers": [],
