@@ -10,6 +10,7 @@ from deskew import determine_skew
 import numpy
 
 def scan_image_for_people(image):
+    
     image = numpy.array(image) # converts the image to a compatible format
     cascade_values_file = 'face_cascade.xml'
     cascade_values = cv2.CascadeClassifier(cascade_values_file)
