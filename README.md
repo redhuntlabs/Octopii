@@ -89,7 +89,7 @@ A file named `output.txt` is created, containing output from the tool. This file
 
 Octopii uses Tesseract for Optical Character Recognition (OCR) and NLTK for Natural Language Processing (NLP) to detect for strings of personal identifiable information. This is done via the following steps:
 
-### 1. Input
+### 1. Input and importing 
 
 Octopii scans for images (jpg and png) and documents (pdf, doc, txt etc). It supports 3 sources:
 
@@ -97,9 +97,15 @@ Octopii scans for images (jpg and png) and documents (pdf, doc, txt etc). It sup
 2. Open directory listing: traverses Apache open directory listings and scans for files 
 3. Local filesystem: can access files and folders within UNIX-like filesystems (macOS and Linux-based operating systems)
 
-### 2. Importing and cleaning image(s)
+Images are detected via Python Imaging Library (PIL) and are opened with OpenCV. PDFs are converted into a list of images and are scanned via OCR. Text-based file types are read into strings and are scanned without OCR.
 
-Images are detected via Python Imaging Library (PIL) and are opened with OpenCV. They are then "cleaned" for text extraction with the following image transformation steps:
+### 2. Face detection
+
+A binary classification image detection technique - known as a "Haar cascade" - is used to detect faces within images. A pre-trained cascade model is supplied in this repo, which contains cascade data for OpenCV to use. Multiple faces can be detected within the same PII image, and the number of faces detected is returned.
+
+### 3. Cleaning image and reading text
+
+Images are then "cleaned" for text extraction with the following image transformation steps:
 
 1. Auto-rotation
 2. Grayscaling
@@ -110,9 +116,11 @@ Images are detected via Python Imaging Library (PIL) and are opened with OpenCV.
 
 ![Image filtering illustration](image_filtering_illustration.png) 
 
-### 3. Optical Character Recognition (OCR)
+Since these steps strip away image data (including colors in photographs), this image cleaning process occurs after attempting face detection. 
 
-Tesseract is used to grab all text strings from an image/file. It is then tokenized into a list of strings, via newline characters ('\n') and spaces (' '). Garbled text, such as null strings and single characters are then removed from this list, resulting in an 'intelligible' list of potential words.
+### 4. Optical Character Recognition (OCR)
+
+Tesseract is used to grab all text strings from an image/file. It is then tokenized into a list of strings, split by newline characters ('\n') and spaces (' '). Garbled text, such as `null` strings and single characters are discarded from this list, resulting in an 'intelligible' list of potential words.
 
 This list of words is then fed into a similarity checker function. This function uses Gestalt pattern matching to compare each word extracted from the PII document with a list of keywords, present in `definitions.json`. This check happens once per cleaning. The number of times a word occurs from the keywords list is counted and this is used to derive a confidence score. When a particular definition's keywords appear repeatedly in these scans, that definition gets the highest score and is picked as the predicted PII class.
 
@@ -137,13 +145,11 @@ The output consists of the following:
 
 - [BeautifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/)
 - [Tesseract](https://github.com/madmaze/pytesseract)
-- [Keras](https://keras.io/)
 - [SciKit](https://scikit-learn.org/)
-- Python Image Library
+- [OpenCV](https://github.com/opencv/opencv) and [Python Image Library](https://github.com/python-pillow/Pillow)
 - [Spaces - DigitalOcean](https://www.digitalocean.com/products/spaces)
-- [Teachable Macine - Google](https://teachablemachine.withgoogle.com/) 
 
-...and countless other people
+...and countless others
 
 ## Disclaimer
 

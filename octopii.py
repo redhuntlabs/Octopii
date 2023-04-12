@@ -42,9 +42,9 @@ temp_dir = "OCTOPII_TEMP/"
 def print_logo():
     logo = '''⠀⠀⠀ ⠀⡀⠀⠀⠀⢀⢀⠀⠀⠀⢀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠈⠋⠓⡅⢸⣝⢷⡅⢰⠙⠙⠁⠀⠀⠀⠀
-⠀⢠⣢⣠⡠⣄⠀⡇⢸⢮⡳⡇⢸⠀⡠⡤⡤⡴⡄⠀   O C T O P I I 
-⠀⠀⠀⠀⠀⡳⠀⠧⣤⡳⣝⢤⠼⠀⡯⠀⠀⠈⠀⠀   A PII scanner  
-⠀⠀⠀⠀⢀⣈⣋⣋⠮⡻⡪⢯⣋⢓⣉⡀⠀⠀⠀⠀(c) 2023 RedHunt Labs Pvt Ltd        
+⠀⢠⣢⣠⡠⣄⠀⡇⢸⢮⡳⡇⢸⠀⡠⡤⡤⡴⡄⠀    O C T O P I I
+⠀⠀⠀⠀⠀⡳⠀⠧⣤⡳⣝⢤⠼⠀⡯⠀⠀⠈⠀⠀    A PII scanner
+⠀⠀⠀⠀⢀⣈⣋⣋⠮⡻⡪⢯⣋⢓⣉⡀⠀⠀⠀⠀(c) 2023 RedHunt Labs Pvt Ltd
 ⠀⠀⠀⢀⣳⡁⡡⣅⠀⡗⣝⠀⡨⣅⢁⣗⠀⠀⠀⠀
 ⠀⠀⠀⠀⠈⠀⠸⣊⣀⡝⢸⣀⣸⠊⠀⠉⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠈⠈⠀⠀⠈⠈'''
@@ -52,19 +52,22 @@ def print_logo():
 
 def help_screen():
     help = '''Usage: python octopii.py <file, local path or URL>
-Note: Only Unix-like filesystems, S3 and open directory URLs are supported.
-
-Reach out to owais.shaikh@redhuntlabs.com for queries'''
+Note: Only Unix-like filesystems, S3 and open directory URLs are supported.'''
     print(help)
 
 def search_pii(file_path):
     if (file_utils.is_image(file_path)):
-        original, intelligible = image_utils.scan_image_for_text(cv2.imread(file_path))
+        image = cv2.imread(file_path)
+        contains_faces = image_utils.scan_image_for_people(image)
+
+        original, intelligible = image_utils.scan_image_for_text(image)
         text = original
 
     elif (file_utils.is_pdf(file_path)):
         pdf_pages = convert_from_path(file_path, 400) # Higher DPI reads small text better
-        for page in pdf_pages:      
+        for page in pdf_pages:
+            contains_faces = image_utils.scan_image_for_people(page)
+
             original, intelligible = image_utils.scan_image_for_text(page)
             text = original
 
@@ -103,6 +106,7 @@ def search_pii(file_path):
         "pii_class" : pii_class,
         "score" : score,
         "country_of_origin": country_of_origin,
+        "faces" : contains_faces,
         "identifiers" : identifiers,
         "emails" : emails,
         "phone_numbers" : phone_numbers,
