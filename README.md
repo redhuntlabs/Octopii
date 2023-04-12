@@ -110,7 +110,13 @@ Images are detected via Python Imaging Library (PIL) and are opened with OpenCV.
 
 ![Image filtering illustration](image_filtering_illustration.png) 
 
-### 3. Optical Character Recognition (OCR)
+Only step 1 of cleaning process is used during face detection to accurately detect faces in upside down images, since the remaining steps strip away image data with each successive step. 
+
+### 3. Face detection (Cascade)
+
+A binary classification image detection technique - known as a "Haar cascade" - is used to detect faces within files. A pre-trained cascade model is supplied in this repo, which contains cascade data for OpenCV to use. Multiple faces can be detected within the same PII image, and the number of faces detected is returned.
+
+### 4. Optical Character Recognition (OCR)
 
 Tesseract is used to grab all text strings from an image/file. It is then tokenized into a list of strings, via newline characters ('\n') and spaces (' '). Garbled text, such as null strings and single characters are then removed from this list, resulting in an 'intelligible' list of potential words.
 
