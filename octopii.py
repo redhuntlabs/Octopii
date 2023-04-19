@@ -155,14 +155,16 @@ if __name__ in '__main__':
 
         except:
             try:
-                files = file_utils.list_directory_files(location)
+                file_urls = file_utils.list_directory_files(location)
 
-                if len(files) != 0: # directory listing (e.g.: Apache)
+                if len(file_urls) != 0: # directory listing (e.g.: Apache)
                     temp_exists = True
                     os.makedirs(os.path.dirname(temp_dir))
                     for url in file_urls:
-                        encoded_url = urllib.parse.quote(url, "UTF-8")
-                        urllib.request.urlretrieve(url, temp_dir + encoded_url)
+                        try:
+                            encoded_url = urllib.parse.quote(url, "UTF-8")
+                            urllib.request.urlretrieve(url, temp_dir + encoded_url)
+                        except: pass    # capture 404
 
                 else:                   # curl text from location if available
                     temp_exists = True
