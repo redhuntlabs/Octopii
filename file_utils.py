@@ -33,14 +33,14 @@ from pdf2image import convert_from_path
 from PIL import Image
 
 def truncate(local_location):
-    lines_per_file = 100000
+    characters_per_file = 1232500
     file_data = ""
 
     with open(local_location, 'r') as file: 
         file_data = file.read()
         file.close()
         
-    truncated_data = file_data[0:lines_per_file]
+    truncated_data = file_data[0:characters_per_file]
 
     with open(local_location, 'w') as file:
         file.write(truncated_data)

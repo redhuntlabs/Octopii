@@ -157,7 +157,7 @@ if __name__ in '__main__':
             try:
                 files = file_utils.list_directory_files(location)
 
-                if len(file_urls) != 0: # directory listing (e.g.: Apache)
+                if len(files) != 0: # directory listing (e.g.: Apache)
                     temp_exists = True
                     os.makedirs(os.path.dirname(temp_dir))
                     for url in file_urls:
