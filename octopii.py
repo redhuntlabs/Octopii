@@ -52,6 +52,8 @@ Note: Only Unix-like filesystems, S3 and open directory URLs are supported.'''
     print(help)
 
 def search_pii(file_path):
+    
+    contains_faces = 0
     if (file_utils.is_image(file_path)):
         image = cv2.imread(file_path)
         contains_faces = image_utils.scan_image_for_people(image)
