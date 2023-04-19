@@ -188,8 +188,10 @@ if __name__ in '__main__':
         print ("Invalid path provided. Please provide a non-empty directory or a file as an argument.")
         sys.exit(0)
 
-    # truncate files if they're too big
-    for file_path in files: file_utils.truncate(file_path)
+    # try and truncate files if they're too big
+    for file_path in files: 
+        try: file_utils.truncate(file_path)
+        except: pass
 
     for file_path in files:
         results = search_pii (file_path)
