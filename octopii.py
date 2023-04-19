@@ -26,18 +26,14 @@ SOFTWARE.
 
 output_file = "output.json"
 
-import os, sys, json, shutil
+import json, textract, sys, urllib, cv2, os, json, shutil, traceback
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-import cv2
-import file_utils
-import urllib
 from pdf2image import convert_from_path
-import json, textract, sys
 import image_utils, file_utils, text_utils
 
 model_file_name = 'models/other_pii_model.h5'
 labels_file_name = 'models/other_pii_model.txt'
-temp_dir = "OCTOPII_TEMP/"
+temp_dir = ".OCTOPII_TEMP/"
 
 def print_logo():
     logo = '''⠀⠀⠀ ⠀⡀⠀⠀⠀⢀⢀⠀⠀⠀⢀⠀⠀⠀⠀⠀
@@ -134,6 +130,10 @@ if __name__ in '__main__':
 
     print("Scanning '" + location + "'")
 
+    try:
+        shutil.rmtree(temp_dir)
+    except: pass
+
     if "http" in location:
         try:
             file_urls = []
@@ -145,9 +145,6 @@ if __name__ in '__main__':
 
             file_urls = file_utils.list_s3_files(location)
             if len(file_urls) != 0:
-                try:
-                    shutil.rmtree(temp_dir)
-                except: pass
                 temp_exists = True
                 os.makedirs(os.path.dirname(temp_dir))
                 for url in file_urls:
@@ -157,16 +154,22 @@ if __name__ in '__main__':
         except:
             try:
                 files = file_utils.list_directory_files(location)
-                if len(file_urls) != 0:
-                    try:
-                        shutil.rmtree(temp_dir)
-                    except: pass
+
+                if len(file_urls) != 0: # directory listing (e.g.: Apache)
                     temp_exists = True
                     os.makedirs(os.path.dirname(temp_dir))
                     for url in file_urls:
                         encoded_url = urllib.parse.quote(url, "UTF-8")
                         urllib.request.urlretrieve(url, temp_dir + encoded_url)
+
+                else:                   # curl text from location if available
+                    temp_exists = True
+                    os.makedirs(os.path.dirname(temp_dir))
+                    encoded_url = urllib.parse.quote(location, "UTF-8") + ".txt"
+                    urllib.request.urlretrieve(location, temp_dir + encoded_url)
+
             except:
+                traceback.print_exc()
                 print ("This URL is not a valid S3 or has no directory listing enabled. Try running Octopii on these files locally.")
                 sys.exit(-1)
 
@@ -182,6 +185,9 @@ if __name__ in '__main__':
     if len(files) == 0:
         print ("Invalid path provided. Please provide a non-empty directory or a file as an argument.")
         sys.exit(0)
+
+    # truncate files if they're too big
+    for file_path in files: file_utils.truncate(file_path)
 
     for file_path in files:
         results = search_pii (file_path)

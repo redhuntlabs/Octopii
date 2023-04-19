@@ -1,6 +1,4 @@
-import difflib, math, ast
-from pdf2image import convert_from_path
-import pytesseract, re, json, textract, sys, getopt, nltk, itertools
+import pytesseract, re, json, nltk, itertools, spacy, difflib, math
 
 def string_tokenizer(text):
     final_word_list = []
