@@ -1,9 +1,9 @@
 """
 MIT License
 
-Copyright (c) 2022 Owais Shaikh 
-Research @ RedHunt Labs Pvt Ltd
-Email: owais.shaikh@redhuntlabs.com
+Copyright (c) Research @ RedHunt Labs Pvt Ltd
+Written by Owais Shaikh
+Email: owais.shaikh@redhuntlabs.com | 0x4f@tuta.io
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -138,7 +138,7 @@ def append_to_output_file(data, file_name):
             with open(file_name, 'r+') as read_file:    
                 loaded_json = json.loads(read_file.read())
         except: # No file
-            print ("Creating new file named \'" + file_name + "\' and writing to it.")
+            print ("\nCreating new file named \'" + file_name + "\' and writing to it.")
 
         with open(file_name, 'w') as write_file:
             loaded_json.append(data)
