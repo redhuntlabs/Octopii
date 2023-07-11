@@ -232,5 +232,28 @@
          "P<UKR",
          "<<"
       ]
+   },
+   "Russian Passport":{
+      "regex":"(?:P<RUS)(?:[A-Z0-9<].+)",
+      "region":"Russia",
+      "keywords":[
+         "Rus",
+         "Federation",
+         "Passport",
+         "P<RUS",
+         "<<"
+      ]
+   },
+   "Russia Driver's License":{
+      "regex":"^[0-9 ]{9,11}$",
+      "region":"Russia",
+      "keywords":[
+         "4a)",
+         "4b)",
+         "4c)",
+         "P<RUS",
+         "9.",
+         "TOBEP"
+      ]
    }
 }

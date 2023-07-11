@@ -196,16 +196,15 @@ if __name__ in '__main__':
 
         try:
             results = search_pii (file_path)
-            print(json.dumps(results, indent=4))
+            print(json.dumps(results, indent=4).replace("{", "").replace("}", "").replace("    ", ""))
             file_utils.append_to_output_file(results, output_file)
+            print ("\nOutput saved in " + output_file)
 
         except textract.exceptions.MissingFileError:
             print ("\nCouldn't find file '" + file_path + "', skipping...")
         
         except textract.exceptions.ShellError:
             print ("\nFile '" + file_path + "' is empty or corrupt, skipping...")
-
-    if os.stat(output_file).st_size > 0: print ("\nOutput saved in " + output_file)
 
     if temp_exists: shutil.rmtree(temp_dir)
 
