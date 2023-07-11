@@ -3,7 +3,7 @@ MIT License
 
 Copyright (c) Research @ RedHunt Labs Pvt Ltd
 Written by Owais Shaikh
-Email: owais.shaikh@redhuntlabs.com
+Email: owais.shaikh@redhuntlabs.com | 0x4f@tuta.io
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,11 +38,11 @@ temp_dir = ".OCTOPII_TEMP/"
 def print_logo():
     logo = '''⠀⠀⠀ ⠀⡀⠀⠀⠀⢀⢀⠀⠀⠀⢀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠈⠋⠓⡅⢸⣝⢷⡅⢰⠙⠙⠁⠀⠀⠀⠀
-⠀⢠⣢⣠⡠⣄⠀⡇⢸⢮⡳⡇⢸⠀⡠⡤⡤⡴⡄⠀    O C T O P I I
-⠀⠀⠀⠀⠀⡳⠀⠧⣤⡳⣝⢤⠼⠀⡯⠀⠀⠈⠀⠀    A PII scanner
-⠀⠀⠀⠀⢀⣈⣋⣋⠮⡻⡪⢯⣋⢓⣉⡀⠀⠀⠀⠀(c) 2023 RedHunt Labs Pvt Ltd
-⠀⠀⠀⢀⣳⡁⡡⣅⠀⡗⣝⠀⡨⣅⢁⣗⠀⠀⠀⠀
-⠀⠀⠀⠀⠈⠀⠸⣊⣀⡝⢸⣀⣸⠊⠀⠉⠀⠀⠀⠀
+⠀⢠⣢⣠⡠⣄⠀⡇⢸⢮⡳⡇⢸⠀⡠⡤⡤⡴  O C T O P I I
+⠀⠀⠀⠀⠀⡳⠀⠧⣤⡳⣝⢤⠼⠀⡯⠀⠀⠈⠀ A PII scanner
+⠀⠀⠀⠀⢀⣈⣋⣋⠮⡻⡪⢯⣋⢓⣉⡀    ______________
+⠀⠀⠀⢀⣳⡁⡡⣅⠀⡗⣝⠀⡨⣅⢁⣗⠀⠀  (c) 2023 RedHunt Labs Pvt Ltd
+⠀⠀⠀⠀⠈⠀⠸⣊⣀⡝⢸⣀⣸⠊⠀⠉⠀⠀⠀⠀by Owais Shaikh
 ⠀⠀⠀⠀⠀⠀⠀⠈⠈⠀⠀⠈⠈'''
     print (logo)
 
@@ -70,12 +70,8 @@ def search_pii(file_path):
             text = original
 
     else:
-        try:
-            text = textract.process(file_path).decode()
-            intelligible = text_utils.string_tokenizer(text)
-        except textract.exceptions.MissingFileError:
-            print ("Couldn't find file '" + file_path + "'")
-            exit(-1)
+        text = textract.process(file_path).decode()
+        intelligible = text_utils.string_tokenizer(text)
 
     addresses = text_utils.regional_pii(text)
     emails = text_utils.email_pii(text, rules)
@@ -116,12 +112,13 @@ def search_pii(file_path):
 
 if __name__ in '__main__':
 
-    if len(sys.argv) > 1:
-        location = sys.argv[1] 
-    else: 
+    if len(sys.argv) == 1:
         print_logo()
         help_screen()
         exit(-1)
+    
+    else:
+        location = sys.argv[1] 
 
     rules=text_utils.get_regexes()
 
@@ -196,11 +193,19 @@ if __name__ in '__main__':
         except: pass
 
     for file_path in files:
-        results = search_pii (file_path)
-        print(json.dumps(results, indent=4))
-        file_utils.append_to_output_file(results, output_file)
 
-    print ("Output saved in " + output_file)
+        try:
+            results = search_pii (file_path)
+            print(json.dumps(results, indent=4))
+            file_utils.append_to_output_file(results, output_file)
+
+        except textract.exceptions.MissingFileError:
+            print ("\nCouldn't find file '" + file_path + "', skipping...")
+        
+        except textract.exceptions.ShellError:
+            print ("\nFile '" + file_path + "' is empty or corrupt, skipping...")
+
+    if os.stat(output_file).st_size > 0: print ("\nOutput saved in " + output_file)
 
     if temp_exists: shutil.rmtree(temp_dir)
 
