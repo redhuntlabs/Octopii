@@ -36,3 +36,5 @@ Keep the following rules in mind when writing your own definitions:
 ### 4. Pull request
 
 Submit a pull request and we'll pick it up and merge it if the changes look good.
+
+For any queries, feel free to contact the developers and maintainers of this project

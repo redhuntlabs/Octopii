@@ -3,7 +3,7 @@ MIT License
 
 Copyright (c) Research @ RedHunt Labs Pvt Ltd
 Written by Owais Shaikh
-Email: owais.shaikh@redhuntlabs.com | 0x4f@tuta.io
+Email: owais.shaikh@redhuntlabs.com | me@0x4f.in
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

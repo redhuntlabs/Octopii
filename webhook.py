@@ -1,7 +1,8 @@
+"""
 MIT License
 
-Copyright (c) 2023 Owais Shaikh 
-Research @ RedHunt Labs Pvt Ltd
+Copyright (c) Research @ RedHunt Labs Pvt Ltd
+Written by Owais Shaikh
 Email: owais.shaikh@redhuntlabs.com | me@0x4f.in
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,3 +22,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+"""
+
+import requests    
+    
+def push_data(data: str, url: str):
+    headers = {'Content-type': 'application/json'}
+    data = f"{"text":'{data}'}"
+
+    req = requests.post (
+        url, # Example: https://hooks.slack.com/services/<>/<>/<>
+        headers=headers, 
+        data=data, 
+        timeout=7
+    )
+
+    if req is not None and req.status_code == 200: print('Scan results sent to webhook.')
+    else: print('Couldn\'t send scan results to webhook. Reason: ' + req.text)

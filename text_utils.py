@@ -3,7 +3,7 @@ MIT License
 
 Copyright (c) Research @ RedHunt Labs Pvt Ltd
 Written by Owais Shaikh
-Email: owais.shaikh@redhuntlabs.com | 0x4f@tuta.io
+Email: owais.shaikh@redhuntlabs.com | me@0x4f.in
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -101,17 +101,10 @@ def read_pdf(pdf):
 
 # python -m spacy download en_core_web_sm
 def regional_pii(text):
-    import locationtagger
-    try:
-        place_entity = locationtagger.find_locations(text = text)
-    except LookupError:
-        nltk.downloader.download('punkt')
-        nltk.download('averaged_perceptron_tagger')
-        nltk.download('maxent_ne_chunker')
-        nltk.download('words')
-        place_entity = locationtagger.find_locations(text = text)
+    from geotext import GeoText
+    place_entity = GeoText(text)
     
-    final_output = place_entity.address_strings + place_entity.regions + place_entity.countries
+    final_output = list(set(place_entity.cities + place_entity.countries))
     return final_output
 
 def keywords_classify_pii(rules, intelligible_text_list):
