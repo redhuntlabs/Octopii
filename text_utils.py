@@ -104,7 +104,7 @@ def regional_pii(text):
     from geotext import GeoText
     place_entity = GeoText(text)
     
-    final_output = list(set(place_entity.cities + place_entity.countries)
+    final_output = list(set(place_entity.cities + place_entity.countries))
     return final_output
 
 def keywords_classify_pii(rules, intelligible_text_list):
