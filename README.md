@@ -163,4 +163,6 @@ This tool is intended for research and educational purposes only. RedHunt Labs a
 
 Copyright © 2023 RedHunt Labs Private Limited. 
 
-By Owais Shaikh (owais.shaikh@redhuntlabs.com | 0x4f@tuta.io)
+By Owais Shaikh 
+- Work: owais.shaikh@redhuntlabs.com 
+- Personal: me@0x4f.in

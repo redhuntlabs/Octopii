@@ -6,7 +6,6 @@ deskew
 tensorflow
 textract
 pdf2image
-locationtagger
 keras
 matplotlib
 pytesseract # along with: sudo apt install tesseract-ocr -y
@@ -16,3 +15,5 @@ imutils
 xmltodict
 nltk
 bs4
+requests
+geotext
