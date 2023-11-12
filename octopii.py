@@ -27,6 +27,7 @@ SOFTWARE.
 output_file = "output.json"
 
 import json, textract, sys, urllib, cv2, os, json, shutil, traceback
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from pdf2image import convert_from_path
 import image_utils, file_utils, text_utils
@@ -34,6 +35,7 @@ import image_utils, file_utils, text_utils
 model_file_name = 'models/other_pii_model.h5'
 labels_file_name = 'models/other_pii_model.txt'
 temp_dir = ".OCTOPII_TEMP/"
+
 
 def print_logo():
     logo = '''⠀⠀⠀ ⠀⡀⠀⠀⠀⢀⢀⠀⠀⠀⢀⠀⠀⠀⠀⠀
@@ -44,15 +46,16 @@ def print_logo():
 ⠀⠀⠀⢀⣳⡁⡡⣅⠀⡗⣝⠀⡨⣅⢁⣗⠀⠀  (c) 2023 RedHunt Labs Pvt Ltd
 ⠀⠀⠀⠀⠈⠀⠸⣊⣀⡝⢸⣀⣸⠊⠀⠉⠀⠀⠀⠀by Owais Shaikh
 ⠀⠀⠀⠀⠀⠀⠀⠈⠈⠀⠀⠈⠈'''
-    print (logo)
+    print(logo)
+
 
 def help_screen():
     help = '''Usage: python octopii.py <file, local path or URL>
 Note: Only Unix-like filesystems, S3 and open directory URLs are supported.'''
     print(help)
 
+
 def search_pii(file_path):
-    
     contains_faces = 0
     if (file_utils.is_image(file_path)):
         image = cv2.imread(file_path)
@@ -62,7 +65,7 @@ def search_pii(file_path):
         text = original
 
     elif (file_utils.is_pdf(file_path)):
-        pdf_pages = convert_from_path(file_path, 400) # Higher DPI reads small text better
+        pdf_pages = convert_from_path(file_path, 400)  # Higher DPI reads small text better
         for page in pdf_pages:
             contains_faces = image_utils.scan_image_for_people(page)
 
@@ -95,43 +98,43 @@ def search_pii(file_path):
         file_path = file_path.replace(temp_dir, "")
         file_path = urllib.parse.unquote(file_path)
 
-    result = {
-        "file_path" : file_path,
-        "pii_class" : pii_class,
-        "score" : score,
+    return {
+        "file_path": file_path,
+        "pii_class": pii_class,
+        "score": score,
         "country_of_origin": country_of_origin,
-        "faces" : contains_faces,
-        "identifiers" : identifiers,
-        "emails" : emails,
-        "phone_numbers" : phone_numbers,
-        "addresses" : addresses
+        "faces": contains_faces,
+        "identifiers": identifiers,
+        "emails": emails,
+        "phone_numbers": phone_numbers,
+        "addresses": addresses,
     }
 
-    return result
-    
 
+import contextlib
 if __name__ in '__main__':
 
     if len(sys.argv) == 1:
         print_logo()
         help_screen()
         exit(-1)
-    
-    else:
-        location = sys.argv[1] 
 
-    rules=text_utils.get_regexes()
+    else:
+        location = sys.argv[1]
+
+    rules = text_utils.get_regexes()
 
     files = []
     items = []
 
     temp_exists = False
 
-    print("Scanning '" + location + "'")
+    print(f"Scanning '{location}'")
 
     try:
         shutil.rmtree(temp_dir)
-    except: pass
+    except Exception:
+        pass
 
     if "http" in location:
         try:
@@ -148,30 +151,28 @@ if __name__ in '__main__':
                 os.makedirs(os.path.dirname(temp_dir))
                 for url in file_urls:
                     file_name = urllib.parse.quote(url, "UTF-8")
-                    urllib.request.urlretrieve(url, temp_dir+file_name)
+                    urllib.request.urlretrieve(url, temp_dir + file_name)
 
-        except:
+        except Exception:
             try:
                 file_urls = file_utils.list_directory_files(location)
 
-                if len(file_urls) != 0: # directory listing (e.g.: Apache)
-                    temp_exists = True
+                temp_exists = True
+                if len(file_urls) != 0:  # directory listing (e.g.: Apache)
                     os.makedirs(os.path.dirname(temp_dir))
                     for url in file_urls:
-                        try:
+                        with contextlib.suppress(Exception):
                             encoded_url = urllib.parse.quote(url, "UTF-8")
                             urllib.request.urlretrieve(url, temp_dir + encoded_url)
-                        except: pass    # capture 404
-
-                else:                   # curl text from location if available
-                    temp_exists = True
+                else:  # curl text from location if available
                     os.makedirs(os.path.dirname(temp_dir))
                     encoded_url = urllib.parse.quote(location, "UTF-8") + ".txt"
                     urllib.request.urlretrieve(location, temp_dir + encoded_url)
 
-            except:
+            except Exception:
                 traceback.print_exc()
-                print ("This URL is not a valid S3 or has no directory listing enabled. Try running Octopii on these files locally.")
+                print(
+                    "This URL is not a valid S3 or has no directory listing enabled. Try running Octopii on these files locally.")
                 sys.exit(-1)
 
         files = file_utils.list_local_files(temp_dir)
@@ -184,29 +185,27 @@ if __name__ in '__main__':
             files = file_utils.list_local_files(location)
 
     if len(files) == 0:
-        print ("Invalid path provided. Please provide a non-empty directory or a file as an argument.")
+        print("Invalid path provided. Please provide a non-empty directory or a file as an argument.")
         sys.exit(0)
 
     # try and truncate files if they're too big
-    for file_path in files: 
-        try: file_utils.truncate(file_path)
-        except: pass
-
+    for file_path in files:
+        with contextlib.suppress(Exception):
+            file_utils.truncate(file_path)
     for file_path in files:
 
         try:
-            results = search_pii (file_path)
+            results = search_pii(file_path)
             print(json.dumps(results, indent=4).replace("{", "").replace("}", "").replace("    ", ""))
             file_utils.append_to_output_file(results, output_file)
-            print ("\nOutput saved in " + output_file)
+            print("\nOutput saved in " + output_file)
 
         except textract.exceptions.MissingFileError:
-            print ("\nCouldn't find file '" + file_path + "', skipping...")
-        
+            print("\nCouldn't find file '" + file_path + "', skipping...")
+
         except textract.exceptions.ShellError:
-            print ("\nFile '" + file_path + "' is empty or corrupt, skipping...")
+            print("\nFile '" + file_path + "' is empty or corrupt, skipping...")
 
     if temp_exists: shutil.rmtree(temp_dir)
 
     sys.exit(0)
-            
