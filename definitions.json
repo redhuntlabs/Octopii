@@ -304,14 +304,12 @@
       ]
    },   
    "Israeli Passport": {
-      "regex": "^[0-9a-z]{8,}$",
+      "regex": "(?:P<ISR)(?:[A-Z0-9<].+)",
       "region": "Israel",
       "keywords": [
-         "State",
          "Israel",
          "Passport",
-         "code",
-         "state"
+         "ISR"
       ]
    },
    "Palestinian Passport": {
