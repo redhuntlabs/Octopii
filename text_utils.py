@@ -101,11 +101,28 @@ def read_pdf(pdf):
 
 # python -m spacy download en_core_web_sm
 def regional_pii(text):
-    from geotext import GeoText
-    place_entity = GeoText(text)
-    
-    final_output = list(set(place_entity.cities + place_entity.countries))
-    return final_output
+    import nltk
+    from nltk import word_tokenize, pos_tag, ne_chunk
+    from nltk.corpus import stopwords
+
+    if not nltk.data.find('tokenizers/punkt'): nltk.download('punkt')
+    if not nltk.data.find('chunkers/maxent_ne_chunker'): nltk.download('maxent_ne_chunker')
+    if not nltk.data.find('corpora/words.zip'): nltk.download('words')
+    stop_words = set(stopwords.words('english'))
+
+    words = word_tokenize(text)
+    tagged_words = pos_tag(words)
+    named_entities = ne_chunk(tagged_words)
+
+    locations = []
+
+    for entity in named_entities:
+        if isinstance(entity, nltk.tree.Tree):
+            if entity.label() in ['GPE', 'GSP', 'LOCATION', 'FACILITY']:
+                location_name = ' '.join([word for word, tag in entity.leaves() if word.lower() not in stop_words])
+                locations.append(location_name)
+
+    return list(set(locations))
 
 def keywords_classify_pii(rules, intelligible_text_list):
     keys = rules.keys()
