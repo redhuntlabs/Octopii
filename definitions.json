@@ -255,5 +255,107 @@
          "9.",
          "TOBEP"
       ]
+   },
+   "Singaporean National Registration Identity Card": {
+      "regex": "(?i)[a-z0-9]{9}?",
+      "region": "Singapore",
+      "keywords": [
+         "Identity Card No",
+         "Singapura"
+      ]
+   },
+   "Singaporean Passport": {
+      "regex": "(?:PASGP.+?)<<(?:[A-Z0-9<].+)",
+      "region": "Sinagpore",
+      "keywords": [
+         "Singapore Citizen",
+         "PASGP"
+      ]
+   },
+   "South African Identity Card": {
+      "regex": "^[0-9]{5,}$",
+      "region": "South Africa",
+      "keywords": [
+         "South Africa",
+         "Identity Number"
+      ]
+   },
+   "South African Passport": {
+      "regex": "^[0-9a-z]{8,}$",
+      "region": "South Africa",
+      "keywords": [
+         "South Africa",
+         "Republique"
+      ]
+   },
+   "North Korean Passport": {
+      "regex": "^[0-9a-z]{8,}$",
+      "region": "North Korea",
+      "keywords": [
+         "For public affairs"
+      ]
+   },
+   "South Korean Passport": {
+      "regex": "^[0-9a-z]{8,}$",
+      "region": "South Korea",
+      "keywords": [
+         "Republic of Korea",
+         "Personal No"
+      ]
+   },   
+   "Israeli Passport": {
+      "regex": "^[0-9a-z]{8,}$",
+      "region": "Israel",
+      "keywords": [
+         "State",
+         "Israel",
+         "Passport",
+         "code",
+         "state"
+      ]
+   },
+   "Palestinian Passport": {
+      "regex": "^[0-9]{7,}$",
+      "region": "Palestine",
+      "keywords": [
+         "Palestinian",
+         "Authority",
+         "Passport",
+         "Issuing",
+         "Authority"
+      ]
+   },
+   "Australian Passport": {
+      "regex": "^[a-z0-9]{6}$",
+      "region": "Australia",
+      "keywords": [
+         "Australia",
+         "Code",
+         "Passport",
+         "Issuing",
+         "State",
+         "Authority",
+         "Document"
+      ]
+   },
+   "Canadian Passport": {
+      "regex": "(?:P<GBR)(?:[A-Z0-9<].+)",
+      "region": "Canada",
+      "keywords": [
+         "PPCAN",
+         "P<CAN",
+         "CAN",
+         "<<<"
+      ]
+   },
+   "Irish Public Services Card": {
+      "regex": null,
+      "region": "Ireland",
+      "keywords": [
+         "Public",
+         "Services",
+         "Card",
+         "Ireland"
+      ]
    }
 }
