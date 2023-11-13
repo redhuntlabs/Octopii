@@ -36,16 +36,7 @@ def string_tokenizer(text):
     
     return final_word_list
 
-def similarity(stringA, stringB):
-    return (
-        math.floor (
-            difflib.SequenceMatcher (
-                a=stringA.lower(), 
-                b=stringB.lower()
-            )
-            .ratio() * 100
-        )
-    )
+def similarity(a, b): return difflib.SequenceMatcher(None, a, b).ratio() * 100
 
 def get_regexes():
     with open('definitions.json') as json_file:
@@ -66,9 +57,7 @@ def phone_pii(text, rules):
     return phone_numbers
 
 def id_card_numbers_pii(text, rules):
-
     results = []
-
     # Clear all non-regional regexes
     regional_regexes = {}
     for key in rules.keys():
@@ -119,28 +108,29 @@ def regional_pii(text):
     for entity in named_entities:
         if isinstance(entity, nltk.tree.Tree):
             if entity.label() in ['GPE', 'GSP', 'LOCATION', 'FACILITY']:
-                location_name = ' '.join([word for word, tag in entity.leaves() if word.lower() not in stop_words])
+                location_name = ' '.join([word for word, tag in entity.leaves() if word.lower() not in stop_words and len(word) > 2])
                 locations.append(location_name)
 
     return list(set(locations))
 
 def keywords_classify_pii(rules, intelligible_text_list):
-    keys = rules.keys()
-    
     scores = {}
-    
-    for key in keys:
+
+    for key, rule in rules.items():
         scores[key] = 0
-        keywords = rules[key]["keywords"]
-        if keywords != None:
-            # Compare each word in intelligible list with each word in keywords list 
-            count = 0
+        keywords = rule.get("keywords", [])
+        if keywords is not None:
             for intelligible_text_word in intelligible_text_list:
                 for keywords_word in keywords:
-                    if similarity(intelligible_text_word, keywords_word) > 75:
-                        count += 1
-                        
-                scores[key] = count 
+                    if similarity(
+                        intelligible_text_word.lower()
+                            .replace(".", "")
+                            .replace("'", "")
+                            .replace("-", "")
+                            .replace("_", "")
+                            .replace(",", ""),
+                        keywords_word.lower()
+                    ) > 80: scores[key] += 1
 
     return scores
     
