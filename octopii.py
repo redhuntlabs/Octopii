@@ -25,11 +25,12 @@ SOFTWARE.
 """
 
 output_file = "output.json"
+notifyURL = ""
 
 import json, textract, sys, urllib, cv2, os, json, shutil, traceback
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from pdf2image import convert_from_path
-import image_utils, file_utils, text_utils
+import image_utils, file_utils, text_utils, webhook
 
 model_file_name = 'models/other_pii_model.h5'
 labels_file_name = 'models/other_pii_model.txt'
@@ -111,14 +112,18 @@ def search_pii(file_path):
     
 
 if __name__ in '__main__':
-
     if len(sys.argv) == 1:
         print_logo()
         help_screen()
         exit(-1)
-    
     else:
-        location = sys.argv[1] 
+        location = sys.argv[1]
+
+        # Check for the -notify flag
+        notify_index = sys.argv.index('--notify') if '--notify' in sys.argv else -1
+
+        if notify_index != -1 and notify_index + 1 < len(sys.argv): notifyURL = sys.argv[notify_index + 1]
+        else: notifyURL = None
 
     rules=text_utils.get_regexes()
 
@@ -198,13 +203,12 @@ if __name__ in '__main__':
             results = search_pii (file_path)
             print(json.dumps(results, indent=4))
             file_utils.append_to_output_file(results, output_file)
+            if notifyURL != None: webhook.push_data(json.dumps(results), notifyURL)
             print ("\nOutput saved in " + output_file)
 
-        except textract.exceptions.MissingFileError:
-            print ("\nCouldn't find file '" + file_path + "', skipping...")
+        except textract.exceptions.MissingFileError: print ("\nCouldn't find file '" + file_path + "', skipping...")
         
-        except textract.exceptions.ShellError:
-            print ("\nFile '" + file_path + "' is empty or corrupt, skipping...")
+        except textract.exceptions.ShellError: print ("\nFile '" + file_path + "' is empty or corrupt, skipping...")
 
     if temp_exists: shutil.rmtree(temp_dir)
 

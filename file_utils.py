@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import requests, xmltodict, json, requests, cv2, urllib, http, traceback, os, textract
+import requests, xmltodict, json, requests, cv2, urllib, http, traceback, os, textract, webhook, octopii
 from skimage import io
 import numpy as np
 from urllib.request import Request, urlopen, re
@@ -139,10 +139,10 @@ def append_to_output_file(data, file_name):
                 loaded_json = json.loads(read_file.read())
         except: # No file
             print ("\nCreating new file named \'" + file_name + "\' and writing to it.")
-
         with open(file_name, 'w') as write_file:
             loaded_json.append(data)
             write_file.write(json.dumps(loaded_json, indent=4))
             
     except:
+        traceback.print_exc()
         print ("Couldn't write to "+ file_name +". Please check if the path is correct and try again.")
