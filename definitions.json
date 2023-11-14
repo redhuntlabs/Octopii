@@ -283,11 +283,13 @@
       ]
    },
    "South African Passport": {
-      "regex": "^[0-9a-z]{8,}$",
+      "regex": "(?:P<ZAF|PMZAF)<<(?:[A-Z0-9<].+)",
       "region": "South Africa",
       "keywords": [
          "South Africa",
-         "Republique"
+         "Republique",
+         "ZAF",
+         "Passport"
       ]
    },
    "South Korean Passport": {
@@ -320,47 +322,49 @@
       ]
    },
    "Palestinian Passport": {
-      "regex": "^[0-9]{7,}$",
+      "regex": "(?:P<PSE|PDPSE)(?:[A-Z0-9<].+)",
       "region": "Palestine",
       "keywords": [
          "Palestinian",
-         "Authority",
+         "Palestine",
          "Passport",
-         "Issuing",
-         "Authority"
+         "PSE"
       ]
    },
    "Australian Passport": {
-      "regex": "^[a-z0-9]{6}$",
+      "regex": "(?:P<PSE|PDPSE)(?:[A-Z0-9<].+)",
       "region": "Australia",
       "keywords": [
          "Australia",
-         "Code",
          "Passport",
-         "Issuing",
-         "State",
-         "Authority",
-         "Document"
+         "AUS",
+         "Australian"
       ]
    },
    "Canadian Passport": {
-      "regex": "(?:P<GBR)(?:[A-Z0-9<].+)",
+      "regex": "(?:P<CAN|PPCAN)(?:[A-Z0-9<].+)",
       "region": "Canada",
       "keywords": [
          "PPCAN",
          "P<CAN",
          "CAN",
-         "<<<"
+         "<<<",
+         "Passport",
+         "Canadian"
       ]
    },
    "Irish Public Services Card": {
-      "regex": null,
+      "regex": "[A-Z][0-9]{7}",
       "region": "Ireland",
       "keywords": [
          "Public",
          "Services",
          "Card",
-         "Ireland"
+         "Ireland",
+         "Eire",
+         "Carta",
+         "Seirbhisi",
+         "Poibli"
       ]
    }
 }
