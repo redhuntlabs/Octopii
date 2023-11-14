@@ -24,14 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import requests, xmltodict, json, requests, cv2, urllib, http, traceback, os, textract
+import requests, xmltodict, json, requests, cv2, urllib, http, traceback, os, textract, webhook, octopii
 from skimage import io
 import numpy as np
 from urllib.request import Request, urlopen, re
 from bs4 import BeautifulSoup
 from pdf2image import convert_from_path
 from PIL import Image
-import webhook, octopii
 
 def truncate(local_location):
     characters_per_file = 1232500
@@ -143,9 +142,9 @@ def append_to_output_file(data, file_name):
 
         with open(file_name, 'w') as write_file:
             loaded_json.append(data)
-            if octopii.notifyURL is not None:
-                webhook.push_data(json.dumps(loaded_json, indent=4), octopii.notifyURL)
+            if len(octopii.notifyURL) > 0: webhook.push_data(json.dumps(loaded_json, indent=4), octopii.notifyURL)
             write_file.write(json.dumps(loaded_json, indent=4))
             
     except:
+        traceback.print_exc()
         print ("Couldn't write to "+ file_name +". Please check if the path is correct and try again.")

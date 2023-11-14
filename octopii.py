@@ -121,7 +121,7 @@ if __name__ in '__main__':
         location = sys.argv[1]
 
         # Check for the -notify flag
-        notify_index = sys.argv.index('-notify') if '-notify' in sys.argv else -1
+        notify_index = sys.argv.index('--notify') if '--notify' in sys.argv else -1
 
         if notify_index != -1 and notify_index + 1 < len(sys.argv):
             notifyURL = sys.argv[notify_index + 1]
@@ -208,11 +208,9 @@ if __name__ in '__main__':
             file_utils.append_to_output_file(results, output_file)
             print ("\nOutput saved in " + output_file)
 
-        except textract.exceptions.MissingFileError:
-            print ("\nCouldn't find file '" + file_path + "', skipping...")
+        except textract.exceptions.MissingFileError: print ("\nCouldn't find file '" + file_path + "', skipping...")
         
-        except textract.exceptions.ShellError:
-            print ("\nFile '" + file_path + "' is empty or corrupt, skipping...")
+        except textract.exceptions.ShellError: print ("\nFile '" + file_path + "' is empty or corrupt, skipping...")
 
     if temp_exists: shutil.rmtree(temp_dir)
 
