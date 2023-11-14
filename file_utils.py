@@ -139,10 +139,8 @@ def append_to_output_file(data, file_name):
                 loaded_json = json.loads(read_file.read())
         except: # No file
             print ("\nCreating new file named \'" + file_name + "\' and writing to it.")
-
         with open(file_name, 'w') as write_file:
             loaded_json.append(data)
-            if len(octopii.notifyURL) > 0: webhook.push_data(json.dumps(loaded_json, indent=4), octopii.notifyURL)
             write_file.write(json.dumps(loaded_json, indent=4))
             
     except:

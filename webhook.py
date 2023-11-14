@@ -24,19 +24,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import requests    
-    
+import requests
+import json
+
 def push_data(data: str, url: str):
     headers = {'Content-type': 'application/json'}
-    if "discord" in url: data = "{\"content\":\"{" + data + "}\"}"
-    else: data = "{\"text\":\"{" + data + "}\"}"
+    
+    if "discord" in url:
+        payload = {"content": data}
+    else:
+        payload = {"text": data}
+    
+    try:
+        req = requests.post(
+            url,
+            headers=headers,
+            json=payload,  # Use the json parameter to send JSON data
+            timeout=7
+        )
 
-    req = requests.post (
-        url, # Example: https://hooks.slack.com/services/<>/<>/<>
-        headers=headers, 
-        data=data, 
-        timeout=7
-    )
+        req.raise_for_status()  # Raise an HTTPError for bad responses
 
-    if req is not None and req.status_code == 200: print('Scan results sent to webhook.')
-    else: print('Couldn\'t send scan results to webhook. Reason: ' + req.text)
+        print('Scan results sent to webhook.')
+    except requests.exceptions.RequestException as e:
+        print(f'Couldn\'t send scan results to webhook. Reason: {e}')
