@@ -25,6 +25,7 @@ SOFTWARE.
 """
 
 output_file = "output.json"
+notifyURL = ""
 
 import json, textract, sys, urllib, cv2, os, json, shutil, traceback
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -116,9 +117,16 @@ if __name__ in '__main__':
         print_logo()
         help_screen()
         exit(-1)
-    
     else:
-        location = sys.argv[1] 
+        location = sys.argv[1]
+
+        # Check for the -notify flag
+        notify_index = sys.argv.index('-notify') if '-notify' in sys.argv else -1
+
+        if notify_index != -1 and notify_index + 1 < len(sys.argv):
+            notifyURL = sys.argv[notify_index + 1]
+        else:
+            notifyURL = None
 
     rules=text_utils.get_regexes()
 

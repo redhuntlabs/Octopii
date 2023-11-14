@@ -28,7 +28,10 @@ import requests
     
 def push_data(data: str, url: str):
     headers = {'Content-type': 'application/json'}
-    data = f"{"text":'{data}'}"
+    if "discord" in url:
+        data = f"{'content':'{data}'}"
+    else:
+        data = f"{'text':'{data}'}"
 
     req = requests.post (
         url, # Example: https://hooks.slack.com/services/<>/<>/<>

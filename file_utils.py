@@ -31,6 +31,7 @@ from urllib.request import Request, urlopen, re
 from bs4 import BeautifulSoup
 from pdf2image import convert_from_path
 from PIL import Image
+import webhook, octopii
 
 def truncate(local_location):
     characters_per_file = 1232500
@@ -142,6 +143,8 @@ def append_to_output_file(data, file_name):
 
         with open(file_name, 'w') as write_file:
             loaded_json.append(data)
+            if octopii.notifyURL is not None:
+                webhook.push_data(json.dumps(loaded_json, indent=4), octopii.notifyURL)
             write_file.write(json.dumps(loaded_json, indent=4))
             
     except:
