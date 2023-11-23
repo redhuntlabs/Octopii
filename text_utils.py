@@ -103,6 +103,7 @@ def regional_pii(text):
         nltk.download('maxent_ne_chunker')
         nltk.download('stopwords')
         nltk.download('words')
+        nltk.download('averaged_perceptron_tagger')
 
     stop_words = set(stopwords.words('english'))
 
