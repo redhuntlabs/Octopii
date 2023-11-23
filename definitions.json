@@ -151,6 +151,19 @@
          "<<<<"
       ]
    },
+   "Resident Identity (Iqama)": {
+      "regex":null,
+      "region":"Saudi Arabia",
+      "keywords":[
+         "Kingdom",
+         "Saudi",
+         "Arabia",
+         "Permit",
+         "Iqama",
+         "Residen",
+         "Identity"
+      ]
+   },
    "Nebraska Driver's License": {
       "regex":"[A-Z]{1}[0-9]{9,11}",
       "region":"United States",
