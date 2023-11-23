@@ -17,3 +17,4 @@ nltk
 bs4
 requests
 geotext
+spacy
