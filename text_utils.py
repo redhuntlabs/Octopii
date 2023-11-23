@@ -39,7 +39,7 @@ def string_tokenizer(text):
 def similarity(a, b): return difflib.SequenceMatcher(None, a, b).ratio() * 100
 
 def get_regexes():
-    with open('definitions.json') as json_file:
+    with open('definitions.json', "r", encoding='utf-8') as json_file:
         _rules = json.load(json_file)
         return _rules
 

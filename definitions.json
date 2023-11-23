@@ -141,6 +141,16 @@
          "<<<<"
       ]
    },
+   "Saudi Arabian Passport": {
+      "regex":"(?:P<SAU)(?:[A-Z0-9<].+)",
+      "region":"Saudi Arabia",
+      "keywords":[
+         "Passport",
+         "Saudi Arabia",
+         "SAU",
+         "<<<<"
+      ]
+   },
    "Nebraska Driver's License": {
       "regex":"[A-Z]{1}[0-9]{9,11}",
       "region":"United States",
