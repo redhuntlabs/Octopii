@@ -158,10 +158,25 @@
          "Kingdom",
          "Saudi",
          "Arabia",
+         "Ministry",
+         "Interior",
          "Permit",
          "Iqama",
          "Residen",
          "Identity"
+      ]
+   },
+   "Saudi Driver's License": {
+      "regex":"\b[0-9]{10}\b",
+      "region":"Saudi Arabia",
+      "keywords":[
+         "Kingdom",
+         "Saudi",
+         "Arabia",
+         "Ministry",
+         "Interior",
+         "Driving",
+         "License"
       ]
    },
    "Nebraska Driver's License": {
