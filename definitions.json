@@ -151,6 +151,60 @@
          "<<<<"
       ]
    },
+   "Resident Identity (Iqama)": {
+      "regex":null,
+      "region":"Saudi Arabia",
+      "keywords":[
+         "Kingdom",
+         "Saudi",
+         "Arabia",
+         "Ministry",
+         "Interior",
+         "Permit",
+         "Iqama",
+         "Residen",
+         "Identity"
+      ]
+   },
+   "Saudi Driver's License": {
+      "regex":"\b[0-9]{10}\b",
+      "region":"Saudi Arabia",
+      "keywords":[
+         "Kingdom",
+         "Saudi",
+         "Arabia",
+         "Ministry",
+         "Interior",
+         "Driving",
+         "License"
+      ]
+   },
+   "Saudi Arabian Visa": {
+      "regex":"(?:V<SAU)(?:[A-Z0-9<].+)",
+      "region":"Saudi Arabia",
+      "keywords":[
+         "Visa",
+         "Saudi Arabia",
+         "V<SAU",
+         "<<<<",
+         "Entries",
+         "Permitted",
+         "Work",
+         "Validity"
+      ]
+   },
+   "Tawuniya Health Insurance": {
+      "regex":"\b[0-9]{5}\b",
+      "region":"Saudi Arabia",
+      "keywords":[
+         "Tawuniya",
+         "Policy",
+         "Holder",
+         "Number",
+         "Deductible",
+         "Approval"
+      ]
+   },
    "Nebraska Driver's License": {
       "regex":"[A-Z]{1}[0-9]{9,11}",
       "region":"United States",
