@@ -193,6 +193,18 @@
          "Validity"
       ]
    },
+   "Tawuniya Health Insurance": {
+      "regex":"\b[0-9]{5}\b",
+      "region":"Saudi Arabia",
+      "keywords":[
+         "Tawuniya",
+         "Policy",
+         "Holder",
+         "Number",
+         "Deductible",
+         "Approval"
+      ]
+   },
    "Nebraska Driver's License": {
       "regex":"[A-Z]{1}[0-9]{9,11}",
       "region":"United States",
