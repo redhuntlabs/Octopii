@@ -94,9 +94,15 @@ def regional_pii(text):
     from nltk import word_tokenize, pos_tag, ne_chunk
     from nltk.corpus import stopwords
 
-    if not nltk.data.find('tokenizers/punkt'): nltk.download('punkt')
-    if not nltk.data.find('chunkers/maxent_ne_chunker'): nltk.download('maxent_ne_chunker')
-    if not nltk.data.find('corpora/words.zip'): nltk.download('words')
+    try:
+        if not nltk.data.find('tokenizers/punkt'): nltk.download('punkt')
+        if not nltk.data.find('chunkers/maxent_ne_chunker'): nltk.download('maxent_ne_chunker')
+        if not nltk.data.find('corpora/words.zip'): nltk.download('words')
+    except LookupError:
+        nltk.download('punkt')
+        nltk.download('maxent_ne_chunker')
+        nltk.download('words')
+
     stop_words = set(stopwords.words('english'))
 
     words = word_tokenize(text)
